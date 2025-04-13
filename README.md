@@ -27,4 +27,4 @@ A modern and user-friendly **eSchool Management System** built with **Flutter**,
 
 - **Flutter** (Dart) – Cross-platform app development
 - **Laravel** – Authentication, database, and cloud services
-- **Riverpod / BLoC** – State management 
+- **BLoC & Cubit** – State management 
