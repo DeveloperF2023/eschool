@@ -27,10 +27,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
           },
           // Increase timeouts
           sendTimeout: const Duration(seconds: 15), // Timeout for sending data
-          receiveTimeout:
-              const Duration(seconds: 15), // Timeout for receiving data
+          receiveTimeout: const Duration(seconds: 15),
           validateStatus: (status) {
-            return status! < 500; // Validate status codes less than 500
+            return status! < 500;
           },
         ),
       );
@@ -40,17 +39,16 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
       if (response.statusCode == 200) {
         await preferences.setString("token", response.data['token']);
-        await preferences.setString(
-            "firstName", response.data['user']['first_name']);
-        await preferences.setString(
-            "lastName", response.data['user']['last_name']);
         await preferences.setString("email", response.data['user']['email']);
+        await preferences.setString("name", response.data['user']['name']);
+        await preferences.setString("role", response.data['user']['role']);
         await preferences.setInt("userId", response.data['user']['id']);
-        await preferences.setString(
-            "profilePicture", response.data['user']['profile_picture']);
         return UserModel.fromJson(response.data);
+      } else if (response.statusCode == 403) {
+        final errorMessage = response.data['error'] ?? 'Failed to log in';
+        throw Exception(errorMessage); // Pass exact backend message
       } else {
-        throw Exception('Failed to login user');
+        throw Exception('Failed to log in');
       }
     } on DioException catch (e) {
       // Handle DioError for timeout or network issues

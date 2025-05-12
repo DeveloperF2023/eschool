@@ -86,6 +86,9 @@ class ChooseUserType extends StatelessWidget {
                     iconUserTypeWhite: AppAssets.teacher,
                     iconUserTypeBlack: AppAssets.teacherBlack,
                     isShowBorder: true,
+                    onNavigate: () => Navigator.pushNamed(
+                        context, AppRoutes.chooseStudentClassroom,
+                        arguments: "teacher"),
                   ),
                   SizedBox(
                     height: 20,
@@ -95,6 +98,9 @@ class ChooseUserType extends StatelessWidget {
                     iconUserTypeWhite: AppAssets.parent,
                     iconUserTypeBlack: AppAssets.parentBlack,
                     isShowBorder: true,
+                    onNavigate: () => Navigator.pushNamed(
+                        context, AppRoutes.chooseParentClassroom,
+                        arguments: "parent"),
                   ),
                 ],
               ),

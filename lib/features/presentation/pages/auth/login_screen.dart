@@ -1,23 +1,17 @@
-import 'package:eschool_management/core/constants/app_colors.dart';
-import 'package:eschool_management/core/utils/local/local_service.dart';
-import 'package:eschool_management/dependencies_injection.dart';
+import 'package:eschool_management/features/presentation/manager/user/login_user/login_user_cubit.dart';
 import 'package:eschool_management/features/presentation/widgets/global/widgets_imports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/constants/app_assets.dart';
+import '../../../../core/routes/app_routes.dart';
 import '../../../../core/utils/helper_functions.dart';
-import '../../manager/user/request_code/request_code_cubit.dart';
+import '../../../../core/utils/local/local_service.dart';
 import '../../widgets/auth/widgets_imports.dart';
 
 class LoginScreen extends StatefulWidget {
-  final String userType;
-  final int classroomId;
-  const LoginScreen({
-    super.key,
-    required this.userType,
-    required this.classroomId,
-  });
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -26,117 +20,99 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HelperFunctions.isDarkMode(context)
-          ? AppColors.dark
-          : AppColors.white,
-      body: BlocProvider<RequestCodeCubit>(
-        create: (_) => locator<RequestCodeCubit>()
-          ..requestCode(
-              email: emailController.text,
-              role: widget.userType,
-              classroomId: widget.classroomId),
+      body: BlocListener<LoginUserCubit, LoginUserState>(
+        listener: (context, state) {
+          if (state is LoginUserLoaded) {
+            Navigator.pushNamed(context, AppRoutes.home);
+          } else if (state is LoginUserFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                    "Your login request is pending approval please retry again after checking your mail if its approved"),
+              ),
+            );
+          }
+        },
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: HelperFunctions.screenHeight(context) * .5,
+              expandedHeight: HelperFunctions.screenHeight(context) * .6,
               floating: false,
               pinned: true,
               automaticallyImplyLeading: false,
               flexibleSpace: FlexibleSpaceBar(
-                background: HeaderLogin(),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppLocalization.of(context)!.translate("signIn"),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
-                                  fontSize: 22, fontWeight: FontWeight.w800),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          AppLocalization.of(context)!
-                              .translate("signInSubtitle"),
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  color: AppColors.textGrey,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400),
-                        ),
-                        const SizedBox(height: 40),
-                        Text(
-                          AppLocalization.of(context)!
-                              .translate("emailAddress"),
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  fontSize: 13, fontWeight: FontWeight.w400),
-                        ),
-                        const SizedBox(height: 5),
-                        Form(
-                          key: _formKey,
-                          child: SizedBox(
-                            height: 45,
-                            child: TextFormField(
-                              controller: emailController,
-                              validator: (value) =>
-                                  value == null || value.isEmpty
-                                      ? 'Email is required'
-                                      : null,
-                              decoration: InputDecoration(
-                                hintText: "Example@mail.com",
-                                contentPadding: const EdgeInsets.only(left: 10),
-                                hintStyle: GoogleFonts.poppins(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 30),
-                    PrimaryButton(
-                      onNavigate: () {
-                        if (_formKey.currentState!.validate()) {
-                          context.read<RequestCodeCubit>().requestCode(
-                                email: emailController.text,
-                                role: widget.userType,
-                                classroomId: widget.classroomId,
-                              );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("Email is required"),
-                            ),
-                          );
-                        }
-                      },
-                      isPadding: false,
-                      textButton:
-                          AppLocalization.of(context)!.translate("login"),
-                    ),
-                  ],
+                background: HeaderAuth(
+                  title: AppLocalization.of(context)!.translate("loginTitle"),
+                  subtitle:
+                      AppLocalization.of(context)!.translate("loginSubtitle"),
+                  imageHeader: AppAssets.welcome,
                 ),
               ),
             ),
+            SliverPadding(
+              padding: EdgeInsets.only(top: 40, left: 15, right: 15),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Text(
+                      AppLocalization.of(context)!
+                          .translate("loginDescription"),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        controller: emailController,
+                        validator: (value) => value == null || value.isEmpty
+                            ? 'Email is required'
+                            : null,
+                        style: GoogleFonts.poppins(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: "Enter your login code here",
+                          contentPadding: const EdgeInsets.only(left: 10),
+                          hintStyle: GoogleFonts.poppins(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    BlocBuilder<LoginUserCubit, LoginUserState>(
+                      builder: (context, state) {
+                        if (state is LoginUserLoading) {
+                          return PrimaryButton(
+                            onNavigate: null,
+                            textButton: "Logging in...",
+                          );
+                        }
+                        return PrimaryButton(
+                          onNavigate: () async {
+                            if (_formKey.currentState!.validate()) {
+                              await context.read<LoginUserCubit>().loginUser(
+                                    code: emailController.text,
+                                  );
+                            }
+                          },
+                          textButton: "Log In",
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

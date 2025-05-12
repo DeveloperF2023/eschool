@@ -1,7 +1,7 @@
 part of 'widgets_imports.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final void Function() onNavigate;
+  final void Function()? onNavigate;
   final String? textButton;
   final Color? buttonColor;
   final bool? isPadding;

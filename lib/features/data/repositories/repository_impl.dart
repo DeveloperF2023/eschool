@@ -16,8 +16,8 @@ class RepositoryImpl extends Repository {
     try {
       final result = await remoteDataSource.loginUser(code);
       return Right(result);
-    } on Exception {
-      return const Left(ServerFailure(message: 'An error has occurred'));
+    } on Exception catch (e) {
+      return Left(ServerFailure(message: 'Error: $e'));
     }
   }
 

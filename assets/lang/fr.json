@@ -41,6 +41,16 @@
   "chooseStudentClassroomTitle": "Entrez dans votre salle de classe",
   "chooseStudentClassroomSubtitle": "Sélectionnez votre classe pour accéder aux emplois du temps, devoirs et à tout ce dont vous avez besoin pour une journée scolaire réussie — votre parcours d’apprentissage commence ici",
   "yourClass": "Votre classe. Votre monde.",
-  "classDescription": "Sélectionnez votre école et votre classe pour déverrouiller votre tableau de bord — vous êtes presque prêt à vous connecter"
-
+  "classDescription": "Sélectionnez votre école et votre classe pour déverrouiller votre tableau de bord — vous êtes presque prêt à vous connecter",
+  "chooseParentClassroomTitle": "Sélectionnez l'école et la classe de votre enfant",
+  "chooseParentClassroomSubtitle": "Choisissez l'école et la classe appropriées pour accéder aux mises à jour, à la fréquentation, aux devoirs et plus encore, le tout au même endroit.",
+  "yourClassParent": "Aménagez votre école et vos salles de classe",
+  "classDescriptionParent": "Saisissez le nom de votre école et les groupes de classe pour commencer",
+  "requestSent": "Demande envoyée avec succès",
+  "requestSentSubtitle": "Un code de connexion vous a été envoyé par e-mail. Veuillez consulter votre boîte de réception et utiliser ce code pour vous connecter.",
+  "loginTitle": "Bon retour ! Commençons à apprendre",
+  "loginSubtitle": "Accédez à votre tableau de bord pour explorer les cours, les mises à jour et tout ce que votre univers scolaire propose.",
+  "loginDescription": "Un code de connexion a été envoyé à votre adresse e-mail. Veuillez le saisir correctement pour accéder à l'application.",
+  "headerHome": "Découvrez votre vie scolaire",
+  "welcomeBack": "Bon retour!"
 }

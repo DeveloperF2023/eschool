@@ -102,7 +102,7 @@ class _ChooseStudentClassroomState extends State<ChooseStudentClassroom> {
                       onNavigate: () {
                         print("user Type: ${widget.userType}");
                         print("classroom Id: $selectedClassroomId");
-                        Navigator.pushNamed(context, AppRoutes.login,
+                        Navigator.pushNamed(context, AppRoutes.enterEmail,
                             arguments: {
                               "userType": widget.userType,
                               "classroomId": selectedClassroomId

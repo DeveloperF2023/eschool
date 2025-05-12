@@ -43,5 +43,16 @@
   "chooseStudentClassroomTitle": "Step Into Your Classroom",
   "chooseStudentClassroomSubtitle": "Choose your classroom to get connected with lessons, teachers, and classmates — personalized just for you",
   "yourClass": "Your Class. Your World.",
-  "classDescription": "Select your school and class to unlock your dashboard — you’re almost ready to log in"
+  "classDescription": "Select your school and class to unlock your dashboard — you’re almost ready to log in",
+  "chooseParentClassroomTitle": "Select Your Child’s School and Classroom",
+  "chooseParentClassroomSubtitle": "Choose the correct school and class to access updates, attendance, homework, and more—all in one place.",
+  "yourClassParent": "Set Up Your School and Classrooms",
+  "classDescriptionParent": "Enter your school’s name and classroom groups to get started",
+  "requestSent": "Request Sent Successfully",
+  "requestSentSubtitle": "A login code has been sent to your email. Please check your inbox and use the code to sign in.",
+  "loginTitle": "Welcome Back! Let’s Get Learning",
+  "loginSubtitle": "Access your dashboard to explore classes, updates, and everything your school world offers.",
+  "loginDescription": "A login code has been sent to your email. Please enter it correctly to access the app successfully.",
+  "headerHome": "Discover your school life",
+  "welcomeBack": "Welcome Back!"
 }

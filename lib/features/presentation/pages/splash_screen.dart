@@ -98,7 +98,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 textButton: "Next",
                 isPadding: true,
                 onNavigate: () {
-                  Navigator.pushNamed(context, AppRoutes.chooseUserType);
+                  //Navigator.pushNamed(context, AppRoutes.chooseUserType);
+                  Navigator.pushNamed(context, AppRoutes.login);
                 },
               ),
               const SizedBox(

@@ -1,19 +1,23 @@
 import 'package:eschool_management/features/presentation/pages/auth/choose_student_classroom.dart';
 import 'package:eschool_management/features/presentation/pages/auth/choose_user_type.dart';
+import 'package:eschool_management/features/presentation/pages/auth/enter_mail_screen.dart';
 import 'package:eschool_management/features/presentation/pages/auth/login_screen.dart';
+import 'package:eschool_management/features/presentation/pages/home_screen.dart';
 import 'package:eschool_management/features/presentation/pages/splash_screen.dart';
+import 'package:eschool_management/features/presentation/pages/success/success_login_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/presentation/pages/auth/choose_parent_classroom_screen.dart';
 import 'app_routes.dart';
 
 class OnGenerateRoute {
   static Route<dynamic>? route(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
-      case AppRoutes.login:
+      case AppRoutes.enterEmail:
         {
           if (args is Map<String, dynamic>) {
-            return routeBuilder(LoginScreen(
+            return routeBuilder(EnterEmailScreen(
               userType: args['userType'],
               classroomId: args['classroomId'],
             ));
@@ -34,6 +38,26 @@ class OnGenerateRoute {
               userType: args,
             ));
           }
+        }
+      case AppRoutes.chooseParentClassroom:
+        {
+          if (args is String) {
+            return routeBuilder(ChooseParentClassroomScreen(
+              userType: args,
+            ));
+          }
+        }
+      case AppRoutes.successLogin:
+        {
+          return routeBuilder(const SuccessLoginScreen());
+        }
+      case AppRoutes.login:
+        {
+          return routeBuilder(const LoginScreen());
+        }
+      case AppRoutes.home:
+        {
+          return routeBuilder(const HomeScreen());
         }
     }
   }

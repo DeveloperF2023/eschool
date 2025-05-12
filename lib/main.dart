@@ -1,3 +1,4 @@
+import 'package:eschool_management/features/presentation/manager/user/login_user/login_user_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/user/request_code/request_code_cubit.dart';
 import 'package:eschool_management/features/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => locator<RequestCodeCubit>()),
+        BlocProvider(create: (_) => locator<LoginUserCubit>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
