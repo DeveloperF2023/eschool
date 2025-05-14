@@ -139,7 +139,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   HeadlineSection(
                       headline:
-                          AppLocalization.of(context)!.translate("homework"))
+                          AppLocalization.of(context)!.translate("homework")),
+                  HomeworkItem()
                 ],
               ),
             ),

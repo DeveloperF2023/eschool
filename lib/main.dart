@@ -18,6 +18,7 @@ import 'core/utils/local/local_service.dart';
 import 'dependencies_injection.dart';
 import 'features/data/data_sources/remote_data_source.dart';
 import 'features/data/data_sources/remote_data_source_impl.dart';
+import 'features/presentation/manager/homeworks/today_and_next_week_homework/today_and_next_week_homework_cubit.dart';
 import 'features/presentation/manager/user/auth/auth_cubit.dart';
 
 void main() {
@@ -25,7 +26,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Dio client = Dio();
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(client: client);
-  print(remoteDataSource.getTodayAndNextWeekExams());
+  print(remoteDataSource.getTodayAndNextWeekHomeworks());
   runApp(const MyApp());
 }
 
@@ -70,6 +71,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => locator<GetTodayClassesCubit>()),
         BlocProvider(create: (_) => locator<GetEventsCubit>()),
         BlocProvider(create: (_) => locator<GetTodayNextWeekExamCubit>()),
+        BlocProvider(create: (_) => locator<TodayAndNextWeekHomeworkCubit>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

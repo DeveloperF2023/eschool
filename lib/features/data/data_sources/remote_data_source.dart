@@ -1,5 +1,6 @@
 import 'package:eschool_management/features/data/models/classroom/classroom_model.dart';
 import 'package:eschool_management/features/data/models/exams/exams_today_next_week_model.dart';
+import 'package:eschool_management/features/data/models/homeworks/homework_today_and_next_week_model.dart';
 import 'package:eschool_management/features/data/models/timetable/today_classes_model.dart';
 import 'package:eschool_management/features/data/models/user/user_model.dart';
 
@@ -28,4 +29,7 @@ abstract class RemoteDataSource {
 
   ///Exams
   Future<List<ExamTodayNextWeekModel>> getTodayAndNextWeekExams();
+
+  ///Homeworks
+  Future<List<HomeworkTodayAndNextWeekModel>> getTodayAndNextWeekHomeworks();
 }

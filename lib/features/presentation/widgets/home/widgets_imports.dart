@@ -24,4 +24,5 @@ part 'discover_item.dart';
 part 'event_item.dart';
 part 'exam_item.dart';
 part 'header_home.dart';
+part 'homework_item.dart';
 part 'today_classes_item.dart';

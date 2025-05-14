@@ -3,6 +3,7 @@ import 'package:eschool_management/core/error/failure.dart';
 import 'package:eschool_management/features/domain/entities/classrooms/classroom_entity.dart';
 import 'package:eschool_management/features/domain/entities/events/event_entity.dart';
 import 'package:eschool_management/features/domain/entities/exams/exams_today_next_week_entity.dart';
+import 'package:eschool_management/features/domain/entities/homeworks/homework_today_and_next_week_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 import 'package:eschool_management/features/domain/entities/user/user_entity.dart';
@@ -99,6 +100,17 @@ class RepositoryImpl extends Repository {
       getTodayAndNextWeekExams() async {
     try {
       final result = await remoteDataSource.getTodayAndNextWeekExams();
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<HomeworkTodayAndNextWeekEntity>>>
+      getTodayAndNextWeekHomeworks() async {
+    try {
+      final result = await remoteDataSource.getTodayAndNextWeekHomeworks();
       return Right(result);
     } on Exception {
       return const Left(ServerFailure(message: 'An error has occurred'));

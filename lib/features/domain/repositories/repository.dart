@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:eschool_management/features/domain/entities/classrooms/classroom_entity.dart';
 import 'package:eschool_management/features/domain/entities/exams/exams_today_next_week_entity.dart';
+import 'package:eschool_management/features/domain/entities/homeworks/homework_today_and_next_week_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 
@@ -33,4 +34,8 @@ abstract class Repository {
   ///Exams
   Future<Either<Failure, List<ExamTodayAndNextWeekEntity>>>
       getTodayAndNextWeekExams();
+
+  ///Homeworks
+  Future<Either<Failure, List<HomeworkTodayAndNextWeekEntity>>>
+      getTodayAndNextWeekHomeworks();
 }
