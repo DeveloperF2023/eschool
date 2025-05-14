@@ -23,4 +23,19 @@ class AppAssets {
   static const String parentType = '$iconPath/parent-type.png';
   static const String studentType = '$iconPath/student-type.png';
   static const String teacherType = '$iconPath/teacher-type.png';
+
+  ///Svg Subjects
+  static const String math = "$iconPath/math.svg";
+  static const String computerScience = "$iconPath/computer-science.svg";
+  static const String english = "$iconPath/english.svg";
+  static const String geography = "$iconPath/geography.svg";
+  static const String physics = "$iconPath/physics.svg";
+  static const String biology = "$iconPath/biology.svg";
+  static const String french = "$iconPath/french.svg";
+  static const String spanish = "$iconPath/spanish.svg";
+  static const String music = "$iconPath/music.svg";
+  static const String economic = "$iconPath/economic.svg";
+  static const String art = "$iconPath/art.svg";
+  static const String philosophy = "$iconPath/philosophy.svg";
+  static const String sport = "$iconPath/sport.svg";
 }

@@ -4,7 +4,8 @@ class AppColors {
   AppColors._();
 
   static const Color primaryColor = Color(0xff6355FC);
-  static const Color secondaryColor = Color(0xffB2A5FF);
+  static const Color eventColor = Color(0xffedfbd1);
+  static const Color timetableColor = Color(0xffcde6ff);
   static const Color grayColor = Color(0xffF1F2F4);
   static const Color whiteSmoke = Color(0xfff7f8f3);
   static const Color greyTextColor = Color(0xffAAA7AD);
@@ -62,4 +63,19 @@ class AppColors {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+
+  /// Subject Colors
+  static const Color mathColor = Color(0xFF5409DA);
+  static const Color physicsColor = Color(0xFF533B4D);
+  static const Color biologyColor = Color(0xFF096B68);
+  static const Color economicColor = Color(0xFFF79B72);
+  static const Color philosophyColor = Color(0xFFFFFA8D);
+  static const Color frenchColor = Color(0xFFF564A9);
+  static const Color englishColor = Color(0xFFCB0404);
+  static const Color spanishColor = Color(0xFFFF9F00);
+  static const Color historyColor = Color(0xFFAFDDFF);
+  static const Color artColor = Color(0xFFE69DB8);
+  static const Color musicColor = Color(0xFF336D82);
+  static const Color physicalEducationColor = Color(0xFFA5158C);
+  static const Color computerScienceColor = Color(0xFFAA60C8);
 }

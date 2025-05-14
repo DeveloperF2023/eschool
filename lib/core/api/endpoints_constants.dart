@@ -6,4 +6,10 @@ class EndpointsConstants {
 
   ///Schools
   static const String getSchool = "schools";
+
+  ///Timetable
+  static const String getTodayClasses = "timetable/today";
+
+  ///Events
+  static const String getEvents = "events";
 }

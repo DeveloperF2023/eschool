@@ -1,7 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:eschool_management/core/error/failure.dart';
 import 'package:eschool_management/features/domain/entities/classrooms/classroom_entity.dart';
+import 'package:eschool_management/features/domain/entities/events/event_entity.dart';
+import 'package:eschool_management/features/domain/entities/exams/exams_today_next_week_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
+import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 import 'package:eschool_management/features/domain/entities/user/user_entity.dart';
 
 import '../../domain/repositories/repository.dart';
@@ -48,6 +51,54 @@ class RepositoryImpl extends Repository {
       int schoolId) async {
     try {
       final result = await remoteDataSource.getClassroomBySchoolId(schoolId);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> getUserInfo() async {
+    try {
+      final result = await remoteDataSource.getUserInfo();
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<String> getCurrentTokenUser() async =>
+      remoteDataSource.getCurrentTokenUser();
+
+  @override
+  Future<bool> isSignInUser() async => remoteDataSource.isSignInUser();
+
+  @override
+  Future<Either<Failure, List<TodayClassesEntity>>> getTodayClasses() async {
+    try {
+      final result = await remoteDataSource.getTodayClasses();
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<EventEntity>>> getEvents() async {
+    try {
+      final result = await remoteDataSource.getEvents();
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ExamTodayAndNextWeekEntity>>>
+      getTodayAndNextWeekExams() async {
+    try {
+      final result = await remoteDataSource.getTodayAndNextWeekExams();
       return Right(result);
     } on Exception {
       return const Left(ServerFailure(message: 'An error has occurred'));

@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:eschool_management/features/data/data_sources/remote_data_source.dart';
 import 'package:eschool_management/features/data/models/classroom/classroom_model.dart';
+import 'package:eschool_management/features/data/models/events/event_model.dart';
+import 'package:eschool_management/features/data/models/exams/exams_today_next_week_model.dart';
 import 'package:eschool_management/features/data/models/schools/school_model.dart';
+import 'package:eschool_management/features/data/models/timetable/today_classes_model.dart';
 import 'package:eschool_management/features/data/models/user/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -43,6 +46,8 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         await preferences.setString("name", response.data['user']['name']);
         await preferences.setString("role", response.data['user']['role']);
         await preferences.setInt("userId", response.data['user']['id']);
+        await preferences.setInt(
+            "classroomId", response.data['user']['classroom_id']);
         return UserModel.fromJson(response.data);
       } else if (response.statusCode == 403) {
         final errorMessage = response.data['error'] ?? 'Failed to log in';
@@ -95,6 +100,26 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     } catch (e) {
       print("Error: $e");
       throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<String> getCurrentTokenUser() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String token = preferences.getString("token")!;
+    print("token $token");
+    return token;
+  }
+
+  @override
+  Future<bool> isSignInUser() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String token = preferences.getString("token")!;
+    print("token $token");
+    if (token != "") {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -154,6 +179,149 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
       if (response.statusCode == 200) {
         return ClassroomModel.fromJsonList(response.data);
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> getUserInfo() async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      final userId = preferences.getInt("userId");
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}user-info/$userId",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+          },
+          sendTimeout: const Duration(seconds: 15),
+          receiveTimeout: const Duration(seconds: 15),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return response.data;
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<List<TodayClassesModel>> getTodayClasses() async {
+    try {
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}${EndpointsConstants.getTodayClasses}",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+          },
+          sendTimeout: const Duration(seconds: 15),
+          receiveTimeout: const Duration(seconds: 15),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return TodayClassesModel.fromJsonList(response.data);
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<List<EventModel>> getEvents() async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      final userId = preferences.getInt("userId");
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}${EndpointsConstants.getEvents}",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+          },
+          sendTimeout: const Duration(seconds: 15),
+          receiveTimeout: const Duration(seconds: 15),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return EventModel.fromJsonList(response.data);
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<List<ExamTodayNextWeekModel>> getTodayAndNextWeekExams() async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      final classroomId = preferences.getInt("classroomId");
+      print('Classroom ID: $classroomId');
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}exams/$classroomId/today-and-next-week",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+          },
+          sendTimeout: const Duration(seconds: 15),
+          receiveTimeout: const Duration(seconds: 15),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return ExamTodayNextWeekModel.fromJsonList(response.data);
       } else {
         throw Exception('Failed to login user');
       }

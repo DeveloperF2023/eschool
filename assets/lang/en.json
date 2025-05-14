@@ -54,5 +54,19 @@
   "loginSubtitle": "Access your dashboard to explore classes, updates, and everything your school world offers.",
   "loginDescription": "A login code has been sent to your email. Please enter it correctly to access the app successfully.",
   "headerHome": "Discover your school life",
-  "welcomeBack": "Welcome Back!"
+  "welcomeBack": "Welcome Back!",
+  "SearchHere": "Search here...",
+  "home": "Home",
+  "exams": "Exams",
+  "events": "Events",
+  "timeTable": "Timetable",
+  "profile": "Profile",
+  "discover": "Discover",
+  "attendance": "Attendance",
+  "books": "Books",
+  "subjects": "Subjects",
+  "todayClasses": "Today's Classes",
+  "seeAll": "See All",
+  "homework": "My Work"
+
 }

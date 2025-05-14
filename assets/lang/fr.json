@@ -1,6 +1,6 @@
 {
   "@@locale": "fr",
-  "home": "Bienvenue chez Houxplore",
+  "welcome": "Bienvenue chez Houxplore",
   "uploadImage": "Téléchargez votre image en toute sécurité",
   "uploadFullName": "Partagez votre nom complet en toute sécurité",
   "fullName": "Entrez votre nom complet",
@@ -52,5 +52,18 @@
   "loginSubtitle": "Accédez à votre tableau de bord pour explorer les cours, les mises à jour et tout ce que votre univers scolaire propose.",
   "loginDescription": "Un code de connexion a été envoyé à votre adresse e-mail. Veuillez le saisir correctement pour accéder à l'application.",
   "headerHome": "Découvrez votre vie scolaire",
-  "welcomeBack": "Bon retour!"
+  "welcomeBack": "Bon retour!",
+  "SearchHere": "Recherchez ici...",
+  "home": "Accueil",
+  "exams": "Examens",
+  "events": "Événements",
+  "timeTable": "Emploi du temps",
+  "profile": "Profile",
+  "discover": "Découvrir",
+  "attendance": "Présence",
+  "books": "Livres",
+  "subjects": "Matières",
+  "todayClasses": "Cours d'aujourd'hui",
+  "seeAll": "Voir tout",
+  "homework": "Mon travail"
 }
