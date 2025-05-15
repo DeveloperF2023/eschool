@@ -38,4 +38,7 @@ class AppAssets {
   static const String art = "$iconPath/art.svg";
   static const String philosophy = "$iconPath/philosophy.svg";
   static const String sport = "$iconPath/sport.svg";
+
+  ///Svg Icons
+  static const String attendance = "$iconPath/attendance.svg";
 }

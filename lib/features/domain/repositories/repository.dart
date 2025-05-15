@@ -6,6 +6,7 @@ import 'package:eschool_management/features/domain/entities/schools/school_entit
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 
 import '../../../core/error/failure.dart';
+import '../entities/attendance/today_and_next_week_attendance_entity.dart';
 import '../entities/events/event_entity.dart';
 import '../entities/user/user_entity.dart';
 
@@ -38,4 +39,8 @@ abstract class Repository {
   ///Homeworks
   Future<Either<Failure, List<HomeworkTodayAndNextWeekEntity>>>
       getTodayAndNextWeekHomeworks();
+
+  ///Attendance
+  Future<Either<Failure, List<TodayAndNextWeekAttendanceEntity>>>
+      getTodayAndNextWeekAttendance();
 }

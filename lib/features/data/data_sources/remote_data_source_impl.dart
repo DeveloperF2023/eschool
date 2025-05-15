@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:eschool_management/features/data/data_sources/remote_data_source.dart';
+import 'package:eschool_management/features/data/models/attendance/today_and_next_week_attendance_model.dart';
 import 'package:eschool_management/features/data/models/classroom/classroom_model.dart';
 import 'package:eschool_management/features/data/models/events/event_model.dart';
 import 'package:eschool_management/features/data/models/exams/exams_today_next_week_model.dart';
@@ -361,6 +362,45 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
       if (response.statusCode == 200) {
         return HomeworkTodayAndNextWeekModel.fromJsonList(response.data);
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<List<TodayAndNextWeekAttendanceModel>>
+      getTodayAndNextWeekAttendance() async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      final classroomId = preferences.getInt("classroomId");
+      final userId = preferences.getInt("userId");
+      print('Classroom ID: $classroomId');
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}attendance/user/$userId/classroom/$classroomId",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+          },
+          sendTimeout: const Duration(seconds: 15),
+          receiveTimeout: const Duration(seconds: 15),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return TodayAndNextWeekAttendanceModel.fromJsonList(response.data);
       } else {
         throw Exception('Failed to login user');
       }

@@ -44,6 +44,7 @@ dependencies:
   dio:
   intl:
   get_it:
+  shimmer:
   flutter_localizations:
     sdk: flutter
 

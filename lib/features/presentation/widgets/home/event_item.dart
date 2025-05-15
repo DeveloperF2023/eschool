@@ -10,7 +10,10 @@ class EventItem extends StatelessWidget {
       child: BlocBuilder<GetEventsCubit, GetEventsState>(
         builder: (context, state) {
           if (state is GetEventsLoading) {
-            return CustomShimmer(child: Container());
+            return LoadingItem(
+              height: HelperFunctions.screenHeight(context) * .21,
+              width: HelperFunctions.screenWidth(context) * .8,
+            );
           } else if (state is GetEventsSuccess) {
             return SizedBox(
               height: HelperFunctions.screenHeight(context) * .21,

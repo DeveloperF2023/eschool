@@ -1,55 +1,53 @@
 part of 'widgets_imports.dart';
 
-class CustomShimmer extends StatefulWidget {
-  final Widget child;
-
-  const CustomShimmer({required this.child});
-
-  @override
-  _CustomShimmerState createState() => _CustomShimmerState();
-}
-
-class _CustomShimmerState extends State<CustomShimmer>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    )..repeat();
-  }
+class LoadingItem extends StatelessWidget {
+  final double? height;
+  final double? width;
+  final Axis? scrollDirection;
+  const LoadingItem(
+      {super.key,
+      this.height,
+      this.width,
+      this.scrollDirection = Axis.horizontal});
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (_, child) {
-        return ShaderMask(
-          shaderCallback: (bounds) {
-            return LinearGradient(
-              colors: [
-                Colors.grey.shade300,
-                Colors.grey.shade100,
-                Colors.grey.shade300
-              ],
-              stops: const [0.1, 0.5, 0.9],
-              begin: Alignment(-1.0 - 2 * _controller.value, 0),
-              end: Alignment(1.0 + 2 * _controller.value, 0),
-            ).createShader(bounds);
-          },
-          blendMode: BlendMode.srcATop,
-          child: widget.child,
-        );
-      },
+    return SizedBox(
+      height: height,
+      child: ListView.builder(
+        itemCount: 3,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.only(left: 15),
+        physics: BouncingScrollPhysics(),
+        itemBuilder: (context, index) => CustomerShimmer(
+          height: height,
+          width: width,
+        ),
+      ),
     );
   }
+}
+
+class CustomerShimmer extends StatelessWidget {
+  final double? height;
+  final double? width;
+  const CustomerShimmer({super.key, this.height, this.width});
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: Container(
+        width: width,
+        height: height,
+        margin: EdgeInsets.only(right: 10),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300, // base color of the shimmer
+          borderRadius: BorderRadius.circular(16), // customize as needed
+        ),
+      ),
+    );
   }
 }

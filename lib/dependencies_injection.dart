@@ -21,10 +21,12 @@ import 'features/data/data_sources/remote_data_source.dart';
 import 'features/data/data_sources/remote_data_source_impl.dart';
 import 'features/data/repositories/repository_impl.dart';
 import 'features/domain/repositories/repository.dart';
+import 'features/domain/use_cases/attendance/fetch_today_and_next_week_attendance_use_case.dart';
 import 'features/domain/use_cases/exams/fetch_today_next_week_exam_use_case.dart';
 import 'features/domain/use_cases/homeworks/fetch_today_and_next_week_homeworks_use_case.dart';
 import 'features/domain/use_cases/user/login_user_use_case.dart';
 import 'features/domain/use_cases/user/request_code_use_case.dart';
+import 'features/presentation/manager/attendance/get_today_and_next_week_attendance/get_today_and_next_week_attendance_cubit.dart';
 import 'features/presentation/manager/exams/get_today_next_week_exam/get_today_next_week_exam_cubit.dart';
 
 final locator = GetIt.instance;
@@ -61,6 +63,9 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => TodayAndNextWeekHomeworkCubit(
         fetchTodayAndNextWeekHomeworkUseCase: locator.call(),
       ));
+  locator.registerFactory(() => GetTodayAndNextWeekAttendanceCubit(
+        fetchTodayAndNextWeekAttendanceUseCase: locator.call(),
+      ));
 
   ///Use Case
   locator.registerLazySingleton(
@@ -85,6 +90,8 @@ Future<void> setupLocator() async {
       () => FetchTodayAndNextWeekExamUseCase(repository: locator.call()));
   locator.registerLazySingleton(
       () => FetchTodayAndNextWeekHomeworkUseCase(repository: locator.call()));
+  locator.registerLazySingleton(
+      () => FetchTodayAndNextWeekAttendanceUseCase(repository: locator.call()));
 
   ///Repository
   locator.registerLazySingleton<Repository>(

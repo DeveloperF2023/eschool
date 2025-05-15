@@ -8,7 +8,7 @@ class ExamItem extends StatefulWidget {
 }
 
 class _ExamItemState extends State<ExamItem> {
-  bool isExpanded = true; // Track if list is expanded
+  bool isExpanded = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +59,9 @@ class _ExamItemState extends State<ExamItem> {
                   GetTodayNextWeekExamState>(
                 builder: (context, state) {
                   if (state is GetTodayNextWeekExamLoading) {
-                    return Container();
+                    return AdvancedLoadingShimmer(
+                      scrollDirection: Axis.vertical,
+                    );
                   } else if (state is GetTodayNextWeekExamLoaded) {
                     return SizedBox(
                       height: HelperFunctions.screenHeight(context) * .18,
@@ -67,6 +69,7 @@ class _ExamItemState extends State<ExamItem> {
                         itemCount:
                             state.exams.length >= 3 ? 3 : state.exams.length,
                         shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.only(top: 5),
                         itemBuilder: (context, index) {
                           final exam = state.exams[index];

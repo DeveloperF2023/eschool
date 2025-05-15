@@ -14,7 +14,7 @@ class TodayAndNextWeekHomeworkCubit
   TodayAndNextWeekHomeworkCubit(
       {required this.fetchTodayAndNextWeekHomeworkUseCase})
       : super(TodayAndNextWeekHomeworkInitial());
-  Future<void> getTodayAndNextWeekExams() async {
+  Future<void> getTodayAndNextWeekHomeworks() async {
     emit(TodayAndNextWeekHomeworkLoading());
     try {
       final result = await fetchTodayAndNextWeekHomeworkUseCase.callback();

@@ -11,11 +11,9 @@ class TodayClassesItem extends StatelessWidget {
         child: BlocBuilder<GetTodayClassesCubit, GetTodayClassesState>(
           builder: (context, state) {
             if (state is GetTodayClassesLoading) {
-              return CustomShimmer(
-                child: SizedBox(
-                  height: HelperFunctions.screenHeight(context) * .1,
-                  width: HelperFunctions.screenWidth(context) * .4,
-                ),
+              return LoadingItem(
+                height: HelperFunctions.screenHeight(context) * .1,
+                width: HelperFunctions.screenWidth(context) * .28,
               );
             } else if (state is GetTodayClassesSuccess) {
               return SizedBox(

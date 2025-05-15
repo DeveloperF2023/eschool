@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:eschool_management/features/presentation/manager/attendance/get_today_and_next_week_attendance/get_today_and_next_week_attendance_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/events/get_events/get_events_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/exams/get_today_next_week_exam/get_today_next_week_exam_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/timetable/today_classes/get_today_classes_cubit.dart';
@@ -26,7 +27,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Dio client = Dio();
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(client: client);
-  print(remoteDataSource.getTodayAndNextWeekHomeworks());
+  print(remoteDataSource.getTodayAndNextWeekAttendance());
   runApp(const MyApp());
 }
 
@@ -72,6 +73,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => locator<GetEventsCubit>()),
         BlocProvider(create: (_) => locator<GetTodayNextWeekExamCubit>()),
         BlocProvider(create: (_) => locator<TodayAndNextWeekHomeworkCubit>()),
+        BlocProvider(
+            create: (_) => locator<GetTodayAndNextWeekAttendanceCubit>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
