@@ -78,4 +78,10 @@ class AppColors {
   static const Color musicColor = Color(0xFF336D82);
   static const Color physicalEducationColor = Color(0xFFA5158C);
   static const Color computerScienceColor = Color(0xFFAA60C8);
+
+  ///Attendance Status Color
+  static const Color absentColor = Color(0xFFCB0404);
+  static const Color presentColor = Color(0xFF309898);
+  static const Color lateColor = Color(0xFFFF9F00);
+  static const Color excusedColor = Color(0xFFF4631E);
 }

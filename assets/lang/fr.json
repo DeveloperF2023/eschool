@@ -65,5 +65,7 @@
   "subjects": "Matières",
   "todayClasses": "Cours d'aujourd'hui",
   "seeAll": "Voir tout",
-  "homework": "Mon travail"
+  "homework": "Mon travail",
+  "noClassesToday": "Aucun cours prévu aujourd’hui. Profitez de ce moment pour vous reposer, recharger vos batteries et bien vous préparer pour la semaine à venir"
+
 }

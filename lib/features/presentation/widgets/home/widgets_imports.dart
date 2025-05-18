@@ -16,8 +16,8 @@ import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/material_symbols.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/utils/extension/attendance_color.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/subject_map.dart';
 import '../../manager/timetable/today_classes/get_today_classes_cubit.dart';

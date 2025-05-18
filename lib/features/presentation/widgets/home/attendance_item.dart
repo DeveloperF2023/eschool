@@ -12,72 +12,91 @@ class AttendanceItem extends StatelessWidget {
           GetTodayAndNextWeekAttendanceState>(
         builder: (context, state) {
           if (state is GetTodayAndNextWeekAttendanceLoading) {
-            return CustomerShimmer(
-              height: HelperFunctions.screenHeight(context) * .05,
-              width: HelperFunctions.screenWidth(context) * .9,
+            return LoadingItem(
+              height: HelperFunctions.screenHeight(context) * .14,
+              width: HelperFunctions.screenWidth(context) * .4,
+              scrollDirection: Axis.horizontal,
             );
             ;
           } else if (state is GetTodayAndNextWeekAttendanceLoaded) {
             return SizedBox(
-              height: HelperFunctions.screenHeight(context) * .28,
+              height: HelperFunctions.screenHeight(context) * .14,
               child: ListView.builder(
                   itemCount: state.attendance.length >= 3
                       ? 3
                       : state.attendance.length,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(bottom: 10),
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.only(bottom: 10, left: 15),
                   itemBuilder: (context, index) {
                     final attendance = state.attendance[index];
                     return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                      width: HelperFunctions.screenWidth(context) * .4,
+                      margin: EdgeInsets.only(right: 10),
                       decoration: BoxDecoration(
-                        color: HelperFunctions.isDarkMode(context)
-                            ? AppColors.darkContainer
-                            : AppColors.light,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                          color: HelperFunctions.isDarkMode(context)
+                              ? AppColors.darkContainer
+                              : AppColors.light,
+                          borderRadius: BorderRadius.circular(10)),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Stack(
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 3),
+                                height: 12,
+                                width:
+                                    HelperFunctions.screenWidth(context) * .4,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red.withValues(alpha: 0.5)),
-                                child: Center(
-                                  child: Text(
-                                    attendance.status!,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge!
-                                        .copyWith(fontSize: 11),
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                formatExamDate(attendance.date!),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .copyWith(fontSize: 11),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                    color: getAttendanceStatusColor(
+                                        attendance.status!)),
                               )
                             ],
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Text(attendance.remarks!,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  attendance.status!.toUpperCase(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(
+                                          color: getAttendanceStatusColor(
+                                              attendance.status!)),
+                                ),
+                                Text(
+                                  formatExamDate(attendance.date!),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(fontSize: 11),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                              HelperFunctions.truncateText(
+                                  attendance.remarks!, 40),
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleLarge!
-                                  .copyWith(fontSize: 11)),
+                                  .titleSmall!
+                                  .copyWith(fontSize: 10),
+                            ),
+                          )
                         ],
                       ),
                     );

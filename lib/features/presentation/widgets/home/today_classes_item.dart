@@ -16,6 +16,29 @@ class TodayClassesItem extends StatelessWidget {
                 width: HelperFunctions.screenWidth(context) * .28,
               );
             } else if (state is GetTodayClassesSuccess) {
+              if (state.classes.isEmpty) {
+                return Container(
+                  height: HelperFunctions.screenHeight(context) * .11,
+                  width: HelperFunctions.screenWidth(context),
+                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.primaryColor.withValues(alpha: 0.1),
+                  ),
+                  child: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                        AppLocalization.of(context)!
+                            .translate("noClassesToday"),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(color: AppColors.black)),
+                  )),
+                );
+              }
               return SizedBox(
                 height: HelperFunctions.screenHeight(context) * .09,
                 width: HelperFunctions.screenWidth(context),

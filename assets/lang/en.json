@@ -67,6 +67,7 @@
   "subjects": "Subjects",
   "todayClasses": "Today's Classes",
   "seeAll": "See All",
-  "homework": "My Work"
+  "homework": "My Work",
+  "noClassesToday": "No classes scheduled for today. Take this time to relax, recharge, and get ready for a productive week ahead"
 
 }

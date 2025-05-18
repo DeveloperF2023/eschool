@@ -63,109 +63,103 @@ class _ExamItemState extends State<ExamItem> {
                       scrollDirection: Axis.vertical,
                     );
                   } else if (state is GetTodayNextWeekExamLoaded) {
-                    return SizedBox(
-                      height: HelperFunctions.screenHeight(context) * .18,
-                      child: ListView.builder(
-                        itemCount:
-                            state.exams.length >= 3 ? 3 : state.exams.length,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.only(top: 5),
-                        itemBuilder: (context, index) {
-                          final exam = state.exams[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 8, left: 5, right: 5),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 40,
-                                      width: 40,
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color:
-                                            getSubjectColor(exam.subjectName!),
-                                      ),
-                                      child: Center(
-                                        child: SvgPicture.asset(
-                                          getSubjectSvg(exam.subjectName!),
-                                          height: 30,
-                                          width: 30,
-                                          fit: BoxFit.contain,
-                                          color: AppColors.white,
-                                        ),
+                    return ListView.builder(
+                      itemCount:
+                          state.exams.length >= 3 ? 3 : state.exams.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.only(top: 5),
+                      itemBuilder: (context, index) {
+                        final exam = state.exams[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 8, left: 5, right: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 40,
+                                    width: 40,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: getSubjectColor(exam.subjectName!),
+                                    ),
+                                    child: Center(
+                                      child: SvgPicture.asset(
+                                        getSubjectSvg(exam.subjectName!),
+                                        height: 30,
+                                        width: 30,
+                                        fit: BoxFit.contain,
+                                        color: AppColors.white,
                                       ),
                                     ),
-                                    SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          exam.title!,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              exam.subjectName!,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                              child: VerticalDivider(
-                                                color:
-                                                    HelperFunctions.isDarkMode(
-                                                            context)
-                                                        ? Colors.white
-                                                        : Colors.black,
-                                              ),
-                                            ),
-                                            Text(
-                                              exam.teacherName!,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleSmall,
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      formatExamDate(exam.examDate!),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge,
-                                    ),
-                                    Text(
-                                      "${customFormatTime(exam.startTime!)} - ${customFormatTime(exam.endTime!)}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(
-                                            fontWeight: FontWeight.w700,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        exam.title!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            exam.subjectName!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall,
                                           ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                                          SizedBox(
+                                            height: 10,
+                                            child: VerticalDivider(
+                                              color: HelperFunctions.isDarkMode(
+                                                      context)
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                            ),
+                                          ),
+                                          Text(
+                                            exam.teacherName!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    formatExamDate(exam.examDate!),
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  Text(
+                                    "${customFormatTime(exam.startTime!)} - ${customFormatTime(exam.endTime!)}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        );
+                      },
                     );
                   } else if (state is GetTodayNextWeekExamFailure) {
                     return Center(
