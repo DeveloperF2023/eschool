@@ -7,5 +7,6 @@ import '../../../../core/utils/local/local_service.dart';
 
 part 'advanced_loading_shimmer.dart';
 part 'headline_section.dart';
+part 'no_data_founded.dart';
 part 'primary_button.dart';
 part 'shimmer_loading.dart';

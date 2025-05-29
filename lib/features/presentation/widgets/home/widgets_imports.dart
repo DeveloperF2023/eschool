@@ -14,6 +14,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/material_symbols.dart';
+import 'package:iconify_flutter/icons/ri.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

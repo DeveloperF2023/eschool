@@ -63,6 +63,18 @@ class _ExamItemState extends State<ExamItem> {
                       scrollDirection: Axis.vertical,
                     );
                   } else if (state is GetTodayNextWeekExamLoaded) {
+                    if (state.exams.isEmpty) {
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            AppLocalization.of(context)!.translate("noExams"),
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                      );
+                    }
                     return ListView.builder(
                       itemCount:
                           state.exams.length >= 3 ? 3 : state.exams.length,

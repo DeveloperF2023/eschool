@@ -68,6 +68,9 @@
   "todayClasses": "Today's Classes",
   "seeAll": "See All",
   "homework": "My Work",
-  "noClassesToday": "No classes scheduled for today. Take this time to relax, recharge, and get ready for a productive week ahead"
-
+  "noClassesToday": "No classes scheduled for today. Take this time to relax, recharge, and get ready for a productive week ahead",
+  "noHomeworkFound": "😦 Woohoo! Looks like there's no homework for now. Enjoy the break while it lasts!",
+  "resultOfExams": "Results of \nexams",
+  "noExams": "✨ No exams scheduled for now. Time to revise, relax, or explore something new!",
+"noAttendance": "📋Attendance data is currently unavailable. It might not have been recorded yet."
 }

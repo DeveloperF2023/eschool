@@ -66,6 +66,9 @@
   "todayClasses": "Cours d'aujourd'hui",
   "seeAll": "Voir tout",
   "homework": "Mon travail",
-  "noClassesToday": "Aucun cours prévu aujourd’hui. Profitez de ce moment pour vous reposer, recharger vos batteries et bien vous préparer pour la semaine à venir"
-
+  "noClassesToday": "Aucun cours prévu aujourd’hui. Profitez de ce moment pour vous reposer, recharger vos batteries et bien vous préparer pour la semaine à venir",
+  "noHomeworkFound": "Youpi ! On dirait qu’il n’y a pas de devoirs pour l’instant. Profite de la pause tant que ça dure !",
+  "resultOfExams": "Resultas des\n examens",
+  "noExams": "✨ Aucun examen prévu pour le moment. C’est le moment de réviser, se détendre ou découvrir quelque chose de nouveau !",
+  "noAttendance": "📋Les données de présence ne sont pas disponibles pour le moment. Elles n'ont peut-être pas encore été enregistrées."
 }

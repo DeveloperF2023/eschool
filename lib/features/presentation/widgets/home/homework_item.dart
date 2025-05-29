@@ -17,8 +17,13 @@ class HomeworkItem extends StatelessWidget {
               width: HelperFunctions.screenWidth(context) * .45,
             );
           } else if (state is TodayAndNextWeekHomeworkLoaded) {
+            if (state.homeworks.isEmpty) {
+              return NoDataFounded(
+                  noFoundedText: AppLocalization.of(context)!
+                      .translate("noHomeworkFound"));
+            }
             return SizedBox(
-              height: HelperFunctions.screenHeight(context) * .22,
+              height: HelperFunctions.screenHeight(context) * .23,
               child: ListView.builder(
                   itemCount: state.homeworks.length,
                   shrinkWrap: true,
@@ -31,11 +36,12 @@ class HomeworkItem extends StatelessWidget {
                       child: Row(
                         children: [
                           Container(
-                            height: HelperFunctions.screenHeight(context) * .21,
+                            height: HelperFunctions.screenHeight(context) * .22,
                             width: HelperFunctions.screenWidth(context) * .45,
                             padding: EdgeInsets.only(top: 5),
                             decoration: BoxDecoration(
-                              color: getSubjectColor(homework.subjectName!),
+                              border:
+                                  Border.all(color: AppColors.borderSecondary),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
@@ -54,7 +60,8 @@ class HomeworkItem extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color: Colors.white),
+                                              color: getSubjectColor(
+                                                  homework.subjectName!)),
                                           child: Center(
                                             child: Text(
                                               homework.subjectName!,
@@ -62,9 +69,7 @@ class HomeworkItem extends StatelessWidget {
                                                   .textTheme
                                                   .titleSmall!
                                                   .copyWith(
-                                                      color: getSubjectColor(
-                                                          homework
-                                                              .subjectName!),
+                                                      color: AppColors.white,
                                                       fontWeight:
                                                           FontWeight.w800,
                                                       fontSize: 9),
@@ -82,7 +87,7 @@ class HomeworkItem extends StatelessWidget {
                                       child: Column(
                                         children: [
                                           Container(
-                                            height: 70,
+                                            height: 60,
                                             child: Text(
                                               HelperFunctions.truncateText(
                                                   homework.title!, 20),
@@ -96,30 +101,57 @@ class HomeworkItem extends StatelessWidget {
                                                 homework.description!, 48),
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .titleSmall,
+                                                .titleSmall!
+                                                .copyWith(
+                                                    color: AppColors.textGrey),
                                           )
                                         ],
                                       ),
-                                    )
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Due: ",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall!
+                                                .copyWith(
+                                                    fontWeight: FontWeight.w800,
+                                                    color: AppColors.textGrey),
+                                          ),
+                                          Text(
+                                            formatExamDate(homework.dueDate!),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleSmall!
+                                                .copyWith(
+                                                    fontWeight: FontWeight.w800,
+                                                    color: AppColors.textGrey),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      bottom: 10, left: 8, right: 10),
+                                      left: 10, right: 10),
+                                  child: Container(height: 5, child: Divider()),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 10),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         homework.teacherName!,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleSmall!
-                                            .copyWith(
-                                                fontWeight: FontWeight.w800),
-                                      ),
-                                      Text(
-                                        formatExamDate(homework.dueDate!),
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleSmall!

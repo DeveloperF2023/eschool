@@ -6,6 +6,7 @@ class HomeworkTodayAndNextWeekModel extends HomeworkTodayAndNextWeekEntity {
   String? dueDate;
   String? classroomName;
   String? teacherName;
+  String? teacherImage;
   String? subjectName;
 
   HomeworkTodayAndNextWeekModel(
@@ -14,7 +15,8 @@ class HomeworkTodayAndNextWeekModel extends HomeworkTodayAndNextWeekEntity {
       this.dueDate,
       this.classroomName,
       this.teacherName,
-      this.subjectName});
+      this.subjectName,
+      this.teacherImage});
 
   factory HomeworkTodayAndNextWeekModel.fromJson(Map<String, dynamic> json) {
     return HomeworkTodayAndNextWeekModel(
@@ -23,6 +25,7 @@ class HomeworkTodayAndNextWeekModel extends HomeworkTodayAndNextWeekEntity {
       dueDate: json['due_date'],
       classroomName: json['classroom_name'],
       teacherName: json['teacher_name'],
+      teacherImage: json['teacher_picture'],
       subjectName: json['subject_name'],
     );
   }

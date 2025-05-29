@@ -6,6 +6,7 @@ class HomeworkTodayAndNextWeekEntity extends Equatable {
   final String? dueDate;
   final String? classroomName;
   final String? teacherName;
+  final String? teacherImage;
   final String? subjectName;
 
   const HomeworkTodayAndNextWeekEntity(
@@ -14,10 +15,18 @@ class HomeworkTodayAndNextWeekEntity extends Equatable {
       this.dueDate,
       this.classroomName,
       this.teacherName,
-      this.subjectName});
+      this.subjectName,
+      this.teacherImage});
 
   @override
   // TODO: implement props
-  List<Object?> get props =>
-      [title, description, dueDate, classroomName, teacherName, subjectName];
+  List<Object?> get props => [
+        title,
+        description,
+        dueDate,
+        classroomName,
+        teacherName,
+        subjectName,
+        teacherImage
+      ];
 }

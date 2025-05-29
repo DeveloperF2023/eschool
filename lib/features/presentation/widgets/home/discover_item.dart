@@ -32,10 +32,11 @@ class DiscoverItem extends StatelessWidget {
         ),
         Text(
           discoverText,
+          textAlign: TextAlign.center,
           style: Theme.of(context)
               .textTheme
               .titleSmall!
-              .copyWith(fontWeight: FontWeight.w600),
+              .copyWith(fontWeight: FontWeight.w600, fontSize: 12),
         ),
       ],
     );
