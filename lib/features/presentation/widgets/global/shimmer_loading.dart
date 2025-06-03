@@ -4,11 +4,12 @@ class LoadingItem extends StatelessWidget {
   final double? height;
   final double? width;
   final Axis? scrollDirection;
-  const LoadingItem(
-      {super.key,
-      this.height,
-      this.width,
-      this.scrollDirection = Axis.horizontal});
+  const LoadingItem({
+    super.key,
+    this.height,
+    this.width,
+    this.scrollDirection = Axis.horizontal,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,8 @@ class LoadingItem extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.only(left: 15),
         physics: BouncingScrollPhysics(),
-        itemBuilder: (context, index) => CustomerShimmer(
-          height: height,
-          width: width,
-        ),
+        itemBuilder:
+            (context, index) => CustomerShimmer(height: height, width: width),
       ),
     );
   }

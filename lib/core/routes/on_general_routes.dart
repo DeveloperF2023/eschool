@@ -17,10 +17,12 @@ class OnGenerateRoute {
       case AppRoutes.enterEmail:
         {
           if (args is Map<String, dynamic>) {
-            return routeBuilder(EnterEmailScreen(
-              userType: args['userType'],
-              classroomId: args['classroomId'],
-            ));
+            return routeBuilder(
+              EnterEmailScreen(
+                userType: args['userType'],
+                classroomId: args['classroomId'],
+              ),
+            );
           }
         }
       case AppRoutes.splash:
@@ -34,17 +36,13 @@ class OnGenerateRoute {
       case AppRoutes.chooseStudentClassroom:
         {
           if (args is String) {
-            return routeBuilder(ChooseStudentClassroom(
-              userType: args,
-            ));
+            return routeBuilder(ChooseStudentClassroom(userType: args));
           }
         }
       case AppRoutes.chooseParentClassroom:
         {
           if (args is String) {
-            return routeBuilder(ChooseParentClassroomScreen(
-              userType: args,
-            ));
+            return routeBuilder(ChooseParentClassroomScreen(userType: args));
           }
         }
       case AppRoutes.successLogin:
@@ -74,10 +72,7 @@ dynamic routeBuilder(Widget child) {
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
       var offsetAnimation = animation.drive(tween);
 
-      return SlideTransition(
-        position: offsetAnimation,
-        child: child,
-      );
+      return SlideTransition(position: offsetAnimation, child: child);
     },
   );
 }
@@ -88,12 +83,8 @@ class NoPageFound extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Page not found"),
-      ),
-      body: const Center(
-        child: Text("Page not found"),
-      ),
+      appBar: AppBar(title: const Text("Page not found")),
+      body: const Center(child: Text("Page not found")),
     );
   }
 }

@@ -70,5 +70,7 @@
   "noHomeworkFound": "Youpi ! On dirait qu’il n’y a pas de devoirs pour l’instant. Profite de la pause tant que ça dure !",
   "resultOfExams": "Resultas des\n examens",
   "noExams": "✨ Aucun examen prévu pour le moment. C’est le moment de réviser, se détendre ou découvrir quelque chose de nouveau !",
-  "noAttendance": "📋Les données de présence ne sont pas disponibles pour le moment. Elles n'ont peut-être pas encore été enregistrées."
+  "noAttendance": "📋Les données de présence ne sont pas disponibles pour le moment. Elles n'ont peut-être pas encore été enregistrées.",
+  "noHomeworkFoundTitle": "Pas de devoirs aujourd’hui !",
+  "examsToday": "Mes Examens aujourd'hui"
 }

@@ -1,8 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:eschool_management/features/domain/entities/classrooms/classroom_entity.dart';
+import 'package:eschool_management/features/domain/entities/exams/exams_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/exams/exams_today_next_week_entity.dart';
+import 'package:eschool_management/features/domain/entities/homeworks/homework_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/homeworks/homework_today_and_next_week_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
+import 'package:eschool_management/features/domain/entities/timetable/timetable_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 
 import '../../../core/error/failure.dart';
@@ -14,7 +17,10 @@ abstract class Repository {
   /// Users
   Future<Either<Failure, UserEntity>> login(String code);
   Future<Either<Failure, String>> requestCode(
-      String email, String role, int classroomId);
+    String email,
+    String role,
+    int classroomId,
+  );
   Future<Either<Failure, Map<String, dynamic>>> getUserInfo();
   Future<bool> isSignInUser();
   Future<String> getCurrentTokenUser();
@@ -24,23 +30,33 @@ abstract class Repository {
 
   ///Classrooms Repository
   Future<Either<Failure, List<ClassroomEntity>>> getClassroomBySchoolId(
-      int schoolId);
+    int schoolId,
+  );
 
   ///Timetable Repository
   Future<Either<Failure, List<TodayClassesEntity>>> getTodayClasses();
+  Future<Either<Failure, List<TimetableByDayEntity>>> getTimetableByDay(
+    String day,
+  );
 
   ///Events Repository
   Future<Either<Failure, List<EventEntity>>> getEvents();
 
   ///Exams
   Future<Either<Failure, List<ExamTodayAndNextWeekEntity>>>
-      getTodayAndNextWeekExams();
+  getTodayAndNextWeekExams();
+  Future<Either<Failure, List<ExamsByDayEntity>>> getExamsByDay(
+    DateTime examDate,
+  );
 
   ///Homeworks
   Future<Either<Failure, List<HomeworkTodayAndNextWeekEntity>>>
-      getTodayAndNextWeekHomeworks();
+  getTodayAndNextWeekHomeworks();
+  Future<Either<Failure, List<HomeworkByDayEntity>>> getHomeworkByDay(
+    DateTime dueDate,
+  );
 
   ///Attendance
   Future<Either<Failure, List<TodayAndNextWeekAttendanceEntity>>>
-      getTodayAndNextWeekAttendance();
+  getTodayAndNextWeekAttendance();
 }

@@ -1,15 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:eschool_management/features/domain/use_cases/classroom/fetch_classroom_by_school_id_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/events/fetch_events_use_case.dart';
+import 'package:eschool_management/features/domain/use_cases/exams/fetch_exams_by_day_use_case.dart';
+import 'package:eschool_management/features/domain/use_cases/homeworks/fetch_homeworks_by_day_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/schools/get_schools_use_case.dart';
+import 'package:eschool_management/features/domain/use_cases/timetable/fetch_timetable_by_day_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/timetable/fetch_today_classes_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/user/fetch_user_info_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/user/get_current_token_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/user/is_sign_in_use_case.dart';
 import 'package:eschool_management/features/presentation/manager/classroom/get_classroom/get_classroom_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/events/get_events/get_events_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/exams/get_exams_by_day/get_exams_by_day_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/homeworks/my_homeworks_by_day/my_homeworks_by_day_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/homeworks/today_and_next_week_homework/today_and_next_week_homework_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/schools/get_school/get_school_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/timetable/get_timetable_by_day/get_timetable_by_day_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/timetable/today_classes/get_today_classes_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/user/auth/auth_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/user/login_user/login_user_cubit.dart';
@@ -32,66 +38,104 @@ import 'features/presentation/manager/exams/get_today_next_week_exam/get_today_n
 final locator = GetIt.instance;
 
 Future<void> setupLocator() async {
-  locator.registerFactory(() => GetSchoolCubit(
-        getSchoolsUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => GetClassroomCubit(
-        fetchClassroomBySchoolIdUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => RequestCodeCubit(
-        requestCodeUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => LoginUserCubit(
-        loginUserUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => PersonalUserInfoCubit(
-        fetchUserInfoUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => AuthCubit(
-        getCurrentTokenUserUseCase: locator.call(),
-        isSignInUserUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => GetTodayClassesCubit(
-        fetchTodayClassesUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => GetEventsCubit(
-        fetchEventsUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => GetTodayNextWeekExamCubit(
-        fetchTodayAndNextWeekExamsUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => TodayAndNextWeekHomeworkCubit(
-        fetchTodayAndNextWeekHomeworkUseCase: locator.call(),
-      ));
-  locator.registerFactory(() => GetTodayAndNextWeekAttendanceCubit(
-        fetchTodayAndNextWeekAttendanceUseCase: locator.call(),
-      ));
+  locator.registerFactory(
+    () => GetSchoolCubit(getSchoolsUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => GetClassroomCubit(fetchClassroomBySchoolIdUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => RequestCodeCubit(requestCodeUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => LoginUserCubit(loginUserUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => PersonalUserInfoCubit(fetchUserInfoUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => AuthCubit(
+      getCurrentTokenUserUseCase: locator.call(),
+      isSignInUserUseCase: locator.call(),
+    ),
+  );
+  locator.registerFactory(
+    () => GetTodayClassesCubit(fetchTodayClassesUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => GetEventsCubit(fetchEventsUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => GetTodayNextWeekExamCubit(
+      fetchTodayAndNextWeekExamsUseCase: locator.call(),
+    ),
+  );
+  locator.registerFactory(
+    () => TodayAndNextWeekHomeworkCubit(
+      fetchTodayAndNextWeekHomeworkUseCase: locator.call(),
+    ),
+  );
+  locator.registerFactory(
+    () => GetTodayAndNextWeekAttendanceCubit(
+      fetchTodayAndNextWeekAttendanceUseCase: locator.call(),
+    ),
+  );
+  locator.registerFactory(
+    () => GetTimetableByDayCubit(fetchTimetableByDayUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => MyHomeworksByDayCubit(fetchHomeworkByDayUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () => GetExamsByDayCubit(fetchExamsByDayUseCase: locator.call()),
+  );
 
   ///Use Case
   locator.registerLazySingleton(
-      () => FetchSchoolsUseCase(repository: locator.call()));
+    () => FetchSchoolsUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => FetchClassroomBySchoolIdUseCase(repository: locator.call()));
+    () => FetchClassroomBySchoolIdUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => RequestCodeUseCase(repository: locator.call()));
+    () => RequestCodeUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => LoginUserUseCase(repository: locator.call()));
+    () => LoginUserUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => FetchUserInfoUseCase(repository: locator.call()));
+    () => FetchUserInfoUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => GetCurrentTokenUseCase(repository: locator.call()));
+    () => GetCurrentTokenUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => IsSignInUserUseCase(repository: locator.call()));
+    () => IsSignInUserUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => FetchTodayClassesUseCase(repository: locator.call()));
+    () => FetchTodayClassesUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => FetchEventsUseCase(repository: locator.call()));
+    () => FetchEventsUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => FetchTodayAndNextWeekExamUseCase(repository: locator.call()));
+    () => FetchTodayAndNextWeekExamUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => FetchTodayAndNextWeekHomeworkUseCase(repository: locator.call()));
+    () => FetchTodayAndNextWeekHomeworkUseCase(repository: locator.call()),
+  );
   locator.registerLazySingleton(
-      () => FetchTodayAndNextWeekAttendanceUseCase(repository: locator.call()));
+    () => FetchTodayAndNextWeekAttendanceUseCase(repository: locator.call()),
+  );
+  locator.registerLazySingleton(
+    () => FetchTimetableByDayUseCase(repository: locator.call()),
+  );
+  locator.registerLazySingleton(
+    () => FetchHomeworkByDayUseCase(repository: locator.call()),
+  );
+  locator.registerLazySingleton(
+    () => FetchExamsByDayUseCase(repository: locator.call()),
+  );
 
   ///Repository
   locator.registerLazySingleton<Repository>(
@@ -100,15 +144,11 @@ Future<void> setupLocator() async {
 
   ///Data Source
   locator.registerLazySingleton<RemoteDataSource>(
-    () => RemoteDataSourceImpl(
-      client: locator.call(),
-    ),
+    () => RemoteDataSourceImpl(client: locator.call()),
   );
 
   locator.registerLazySingleton<RemoteDataSourceImpl>(
-    () => RemoteDataSourceImpl(
-      client: locator.call(),
-    ),
+    () => RemoteDataSourceImpl(client: locator.call()),
   );
 
   ///External

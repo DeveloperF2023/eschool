@@ -3,6 +3,7 @@ class AppAssets {
 
   static const String imagePath = "assets/images";
   static const String iconPath = "assets/icons";
+  static const String lottiePath = "assets/lotties";
   static const String splashStudent = "$imagePath/splash2.png";
   static const String splashParent = "$imagePath/splash1.png";
   static const String splashTeacher = "$imagePath/splash3.png";
@@ -41,4 +42,7 @@ class AppAssets {
 
   ///Svg Icons
   static const String attendance = "$iconPath/attendance.svg";
+
+  ///Lotties
+  static const String loading = "$lottiePath/loading.json";
 }

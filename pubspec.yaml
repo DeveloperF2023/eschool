@@ -45,6 +45,8 @@ dependencies:
   intl:
   get_it:
   shimmer:
+  cached_network_image:
+  lottie:
   flutter_localizations:
     sdk: flutter
 
@@ -75,6 +77,7 @@ flutter:
     - assets/lang/
     - assets/images/
     - assets/icons/
+    - assets/lotties/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -72,5 +72,7 @@
   "noHomeworkFound": "😦 Woohoo! Looks like there's no homework for now. Enjoy the break while it lasts!",
   "resultOfExams": "Results of \nexams",
   "noExams": "✨ No exams scheduled for now. Time to revise, relax, or explore something new!",
-"noAttendance": "📋Attendance data is currently unavailable. It might not have been recorded yet."
+  "noAttendance": "📋Attendance data is currently unavailable. It might not have been recorded yet.",
+  "noHomeworkFoundTitle": "No Homework Today!",
+  "examsToday": "My Exams Today"
 }

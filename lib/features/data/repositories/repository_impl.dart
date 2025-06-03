@@ -3,9 +3,12 @@ import 'package:eschool_management/core/error/failure.dart';
 import 'package:eschool_management/features/domain/entities/attendance/today_and_next_week_attendance_entity.dart';
 import 'package:eschool_management/features/domain/entities/classrooms/classroom_entity.dart';
 import 'package:eschool_management/features/domain/entities/events/event_entity.dart';
+import 'package:eschool_management/features/domain/entities/exams/exams_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/exams/exams_today_next_week_entity.dart';
+import 'package:eschool_management/features/domain/entities/homeworks/homework_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/homeworks/homework_today_and_next_week_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
+import 'package:eschool_management/features/domain/entities/timetable/timetable_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 import 'package:eschool_management/features/domain/entities/user/user_entity.dart';
 
@@ -28,10 +31,16 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<Either<Failure, String>> requestCode(
-      String email, String role, int classroomId) async {
+    String email,
+    String role,
+    int classroomId,
+  ) async {
     try {
-      final result =
-          await remoteDataSource.requestCode(email, role, classroomId);
+      final result = await remoteDataSource.requestCode(
+        email,
+        role,
+        classroomId,
+      );
       return Right(result);
     } on Exception {
       return const Left(ServerFailure(message: 'An error has occurred'));
@@ -50,7 +59,8 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<Either<Failure, List<ClassroomEntity>>> getClassroomBySchoolId(
-      int schoolId) async {
+    int schoolId,
+  ) async {
     try {
       final result = await remoteDataSource.getClassroomBySchoolId(schoolId);
       return Right(result);
@@ -98,7 +108,7 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<Either<Failure, List<ExamTodayAndNextWeekEntity>>>
-      getTodayAndNextWeekExams() async {
+  getTodayAndNextWeekExams() async {
     try {
       final result = await remoteDataSource.getTodayAndNextWeekExams();
       return Right(result);
@@ -109,7 +119,7 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<Either<Failure, List<HomeworkTodayAndNextWeekEntity>>>
-      getTodayAndNextWeekHomeworks() async {
+  getTodayAndNextWeekHomeworks() async {
     try {
       final result = await remoteDataSource.getTodayAndNextWeekHomeworks();
       return Right(result);
@@ -120,9 +130,45 @@ class RepositoryImpl extends Repository {
 
   @override
   Future<Either<Failure, List<TodayAndNextWeekAttendanceEntity>>>
-      getTodayAndNextWeekAttendance() async {
+  getTodayAndNextWeekAttendance() async {
     try {
       final result = await remoteDataSource.getTodayAndNextWeekAttendance();
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TimetableByDayEntity>>> getTimetableByDay(
+    String day,
+  ) async {
+    try {
+      final result = await remoteDataSource.getTimetableByDay(day);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<HomeworkByDayEntity>>> getHomeworkByDay(
+    DateTime dueDate,
+  ) async {
+    try {
+      final result = await remoteDataSource.getHomeworkByDay(dueDate);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ExamsByDayEntity>>> getExamsByDay(
+    DateTime examDate,
+  ) async {
+    try {
+      final result = await remoteDataSource.getExamsByDay(examDate);
       return Right(result);
     } on Exception {
       return const Left(ServerFailure(message: 'An error has occurred'));

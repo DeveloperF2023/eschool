@@ -3,9 +3,12 @@ import 'package:eschool_management/features/data/data_sources/remote_data_source
 import 'package:eschool_management/features/data/models/attendance/today_and_next_week_attendance_model.dart';
 import 'package:eschool_management/features/data/models/classroom/classroom_model.dart';
 import 'package:eschool_management/features/data/models/events/event_model.dart';
+import 'package:eschool_management/features/data/models/exams/exams_by_day_model.dart';
 import 'package:eschool_management/features/data/models/exams/exams_today_next_week_model.dart';
+import 'package:eschool_management/features/data/models/homeworks/homework_by_day_model.dart';
 import 'package:eschool_management/features/data/models/homeworks/homework_today_and_next_week_model.dart';
 import 'package:eschool_management/features/data/models/schools/school_model.dart';
+import 'package:eschool_management/features/data/models/timetable/timetable_by_day_model.dart';
 import 'package:eschool_management/features/data/models/timetable/today_classes_model.dart';
 import 'package:eschool_management/features/data/models/user/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,11 +31,11 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           // Increase timeouts
-          sendTimeout: const Duration(seconds: 15), // Timeout for sending data
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50), // Timeout for sending data
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -49,7 +52,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         await preferences.setString("role", response.data['user']['role']);
         await preferences.setInt("userId", response.data['user']['id']);
         await preferences.setInt(
-            "classroomId", response.data['user']['classroom_id']);
+          "classroomId",
+          response.data['user']['classroom_id'],
+        );
         return UserModel.fromJson(response.data);
       } else if (response.statusCode == 403) {
         final errorMessage = response.data['error'] ?? 'Failed to log in';
@@ -77,17 +82,19 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) => true,
         ),
       );
       print(
-          "Sending request with: email=$email, role=$role, classroomId=$classroomId");
+        "Sending request with: email=$email, role=$role, classroomId=$classroomId",
+      );
       print(
-          "Url of request code :${EndpointsConstants.baseUrl}${EndpointsConstants.requestCode}");
+        "Url of request code :${EndpointsConstants.baseUrl}${EndpointsConstants.requestCode}",
+      );
       print(response.statusCode);
       print(response.data);
 
@@ -133,10 +140,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -167,10 +174,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -203,10 +210,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -237,10 +244,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -273,10 +280,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -310,10 +317,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -338,7 +345,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<HomeworkTodayAndNextWeekModel>>
-      getTodayAndNextWeekHomeworks() async {
+  getTodayAndNextWeekHomeworks() async {
     try {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       final classroomId = preferences.getInt("classroomId");
@@ -348,10 +355,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -376,7 +383,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<TodayAndNextWeekAttendanceModel>>
-      getTodayAndNextWeekAttendance() async {
+  getTodayAndNextWeekAttendance() async {
     try {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       final classroomId = preferences.getInt("classroomId");
@@ -387,10 +394,10 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         options: Options(
           headers: {
             'Accept': 'application/json',
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          sendTimeout: const Duration(seconds: 15),
-          receiveTimeout: const Duration(seconds: 15),
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
           validateStatus: (status) {
             return status! < 500;
           },
@@ -401,6 +408,117 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
       if (response.statusCode == 200) {
         return TodayAndNextWeekAttendanceModel.fromJsonList(response.data);
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<List<TimetableByDayModel>> getTimetableByDay(String day) async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      final classroomId = preferences.getInt("classroomId");
+      print('Classroom ID: $classroomId');
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}timetables/day?day=$day&classroom_id=$classroomId",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+          },
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return TimetableByDayModel.fromJsonList(response.data);
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<List<HomeworksByDayModel>> getHomeworkByDay(DateTime dueDate) async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      final classroomId = preferences.getInt("classroomId");
+      print('Classroom ID: $classroomId');
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}homeworks/$classroomId/by-date/$dueDate",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+          },
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return HomeworksByDayModel.fromJsonList(response.data);
+      } else {
+        throw Exception('Failed to login user');
+      }
+    } on DioException catch (e) {
+      print("DioError: ${e.message}");
+      throw Exception("Connection Timeout or Network Error");
+    } catch (e) {
+      print("Error: $e");
+      throw Exception("Request Code failed");
+    }
+  }
+
+  @override
+  Future<List<ExamsByDayModel>> getExamsByDay(DateTime examDate) async {
+    try {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      final classroomId = preferences.getInt("classroomId");
+      print('Classroom ID: $classroomId');
+      final response = await client.get(
+        "${EndpointsConstants.baseUrl}exams/$classroomId/by-date?date=$examDate",
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+          },
+          sendTimeout: const Duration(seconds: 50),
+          receiveTimeout: const Duration(seconds: 50),
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      print(response.statusCode);
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return ExamsByDayModel.fromJsonList(response.data);
       } else {
         throw Exception('Failed to login user');
       }

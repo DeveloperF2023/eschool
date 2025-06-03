@@ -1,6 +1,9 @@
 import 'package:eschool_management/features/data/models/classroom/classroom_model.dart';
+import 'package:eschool_management/features/data/models/exams/exams_by_day_model.dart';
 import 'package:eschool_management/features/data/models/exams/exams_today_next_week_model.dart';
+import 'package:eschool_management/features/data/models/homeworks/homework_by_day_model.dart';
 import 'package:eschool_management/features/data/models/homeworks/homework_today_and_next_week_model.dart';
+import 'package:eschool_management/features/data/models/timetable/timetable_by_day_model.dart';
 import 'package:eschool_management/features/data/models/timetable/today_classes_model.dart';
 import 'package:eschool_management/features/data/models/user/user_model.dart';
 
@@ -24,15 +27,18 @@ abstract class RemoteDataSource {
 
   ///Timetable
   Future<List<TodayClassesModel>> getTodayClasses();
+  Future<List<TimetableByDayModel>> getTimetableByDay(String day);
 
   ///Events
   Future<List<EventModel>> getEvents();
 
   ///Exams
   Future<List<ExamTodayNextWeekModel>> getTodayAndNextWeekExams();
+  Future<List<ExamsByDayModel>> getExamsByDay(DateTime examDate);
 
   ///Homeworks
   Future<List<HomeworkTodayAndNextWeekModel>> getTodayAndNextWeekHomeworks();
+  Future<List<HomeworksByDayModel>> getHomeworkByDay(DateTime dueDate);
 
   ///Attendance
   Future<List<TodayAndNextWeekAttendanceModel>> getTodayAndNextWeekAttendance();

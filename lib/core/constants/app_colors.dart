@@ -84,4 +84,8 @@ class AppColors {
   static const Color presentColor = Color(0xFF309898);
   static const Color lateColor = Color(0xFFFF9F00);
   static const Color excusedColor = Color(0xFFF4631E);
+
+  ///Status of timetable
+  static const Color canceledCourseColor = Color(0xFFC84C05);
+  static const Color rescheduledCourseColor = Color(0xFF574964);
 }
