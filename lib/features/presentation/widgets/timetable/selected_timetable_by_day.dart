@@ -63,96 +63,108 @@ class SelectedTimetableByDay extends StatelessWidget {
                   height: 70,
                   color: getSubjectColor(timetableItem.subjectName!),
                 ),
-                Container(
-                  width: HelperFunctions.screenWidth(context) - 105,
-                  padding: EdgeInsets.only(left: 5, top: 5, bottom: 5),
-                  color: getSubjectColor(
-                    timetableItem.subjectName!,
-                  ).withValues(alpha: 0.2),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        timetableItem.subjectName!,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color:
-                              HelperFunctions.isDarkMode(context)
-                                  ? AppColors.white
-                                  : Colors.black,
-                        ),
+                GestureDetector(
+                  onTap:
+                      () => Navigator.pushNamed(
+                        context,
+                        AppRoutes.subjectDetail,
+                        arguments: timetableItem,
                       ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 25,
-                                margin: EdgeInsets.only(bottom: 5, top: 3),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      "${EndpointsConstants.imageUrl}${timetableItem.teacherPicture}",
-                                  imageBuilder:
-                                      (context, imageProvider) => Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
+                  child: Container(
+                    width: HelperFunctions.screenWidth(context) - 105,
+                    padding: EdgeInsets.only(left: 5, top: 5, bottom: 5),
+                    color: getSubjectColor(
+                      timetableItem.subjectName!,
+                    ).withValues(alpha: 0.2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          timetableItem.subjectName!,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge!.copyWith(
+                            color:
+                                HelperFunctions.isDarkMode(context)
+                                    ? AppColors.white
+                                    : Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  height: 25,
+                                  width: 25,
+                                  margin: EdgeInsets.only(bottom: 5, top: 3),
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        "${EndpointsConstants.imageUrl}${timetableItem.teacherPicture}",
+                                    imageBuilder:
+                                        (context, imageProvider) => Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                  placeholder:
-                                      (context, url) => PictureLoading(
-                                        imageUrl:
-                                            "${EndpointsConstants.imageUrl}${timetableItem.teacherPicture}",
-                                      ),
-                                  errorWidget:
-                                      (context, url, error) =>
-                                          Icon(Icons.error),
+                                    placeholder:
+                                        (context, url) => PictureLoading(
+                                          imageUrl:
+                                              "${EndpointsConstants.imageUrl}${timetableItem.teacherPicture}",
+                                        ),
+                                    errorWidget:
+                                        (context, url, error) =>
+                                            Icon(Icons.error),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                timetableItem.teacherName!,
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.bodyMedium!.copyWith(
-                                  color:
-                                      HelperFunctions.isDarkMode(context)
-                                          ? AppColors.white
-                                          : AppColors.textGrey,
+                                SizedBox(width: 5),
+                                Text(
+                                  timetableItem.teacherName!,
+                                  style: Theme.of(
+                                    context,
+                                  ).textTheme.bodyMedium!.copyWith(
+                                    color:
+                                        HelperFunctions.isDarkMode(context)
+                                            ? AppColors.white
+                                            : AppColors.textGrey,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          timetableItem.status == "scheduled"
-                              ? Container()
-                              : Container(
-                                height: 20,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 5,
-                                  vertical: 3,
+                              ],
+                            ),
+                            timetableItem.status == "scheduled"
+                                ? Container()
+                                : Container(
+                                  height: 20,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 5,
+                                    vertical: 3,
+                                  ),
+                                  margin: EdgeInsets.only(right: 10),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        timetableItem.status == "canceled"
+                                            ? AppColors.canceledCourseColor
+                                            : AppColors.rescheduledCourseColor,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    timetableItem.status!,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(color: AppColors.white),
+                                  ),
                                 ),
-                                margin: EdgeInsets.only(right: 10),
-                                decoration: BoxDecoration(
-                                  color:
-                                      timetableItem.status == "canceled"
-                                          ? AppColors.canceledCourseColor
-                                          : AppColors.rescheduledCourseColor,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Text(
-                                  timetableItem.status!,
-                                  style: Theme.of(context).textTheme.bodyMedium!
-                                      .copyWith(color: AppColors.white),
-                                ),
-                              ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

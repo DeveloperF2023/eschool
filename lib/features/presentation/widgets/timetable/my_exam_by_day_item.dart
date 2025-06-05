@@ -9,25 +9,35 @@ class MyExamByDayItem extends StatelessWidget {
     return Container(
       width: HelperFunctions.screenWidth(context),
       padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+      color:
+          HelperFunctions.isDarkMode(context)
+              ? AppColors.dark
+              : AppColors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                AppLocalization.of(context)!.translate("examsToday"),
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Iconify(
-                  Ri.close_circle_line,
-                  color: Colors.black,
-                  size: 28,
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppLocalization.of(context)!.translate("examsToday"),
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-              ),
-            ],
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Iconify(
+                    Ri.close_circle_line,
+                    color:
+                        HelperFunctions.isDarkMode(context)
+                            ? AppColors.white
+                            : Colors.black,
+                    size: 28,
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 30),
           BlocBuilder<GetExamsByDayCubit, GetExamsByDayState>(
@@ -97,7 +107,7 @@ class MyExamByDayItem extends StatelessWidget {
                                   (context, url, error) => Icon(Icons.error),
                             ),
                           ),
-                          SizedBox(width: 5),
+                          SizedBox(width: 10),
                           SizedBox(
                             width: HelperFunctions.screenWidth(context) * .6,
                             child: Column(
@@ -138,10 +148,14 @@ class MyExamByDayItem extends StatelessWidget {
                                     SizedBox(width: 5),
                                     Text(
                                       exam.teacherName!,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall!
-                                          .copyWith(color: Colors.black),
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.titleSmall!.copyWith(
+                                        color:
+                                            HelperFunctions.isDarkMode(context)
+                                                ? AppColors.white
+                                                : Colors.black,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -149,11 +163,7 @@ class MyExamByDayItem extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      DateFormat.Hm().format(
-                                        DateTime.parse(
-                                          '1970-01-01 ${exam.startTime!}',
-                                        ),
-                                      ),
+                                      "${DateFormat.Hm().format(DateTime.parse('1970-01-01 ${exam.startTime!}'))} - ${DateFormat.Hm().format(DateTime.parse('1970-01-01 ${exam.endTime!}'))}",
                                     ),
                                   ],
                                 ),

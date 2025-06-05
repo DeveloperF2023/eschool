@@ -1,9 +1,11 @@
+import 'package:eschool_management/features/domain/entities/timetable/timetable_by_day_entity.dart';
 import 'package:eschool_management/features/presentation/pages/auth/choose_student_classroom.dart';
 import 'package:eschool_management/features/presentation/pages/auth/choose_user_type.dart';
 import 'package:eschool_management/features/presentation/pages/auth/enter_mail_screen.dart';
 import 'package:eschool_management/features/presentation/pages/auth/login_screen.dart';
 import 'package:eschool_management/features/presentation/pages/home_screen.dart';
 import 'package:eschool_management/features/presentation/pages/splash_screen.dart';
+import 'package:eschool_management/features/presentation/pages/subject_detail_screen.dart';
 import 'package:eschool_management/features/presentation/pages/success/success_login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -56,6 +58,12 @@ class OnGenerateRoute {
       case AppRoutes.home:
         {
           return routeBuilder(const HomeScreen());
+        }
+      case AppRoutes.subjectDetail:
+        {
+          if (args is TimetableByDayEntity) {
+            return routeBuilder(SubjectDetailScreen(timetable: args));
+          }
         }
     }
   }

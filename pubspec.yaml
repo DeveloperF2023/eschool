@@ -47,6 +47,7 @@ dependencies:
   shimmer:
   cached_network_image:
   lottie:
+  video_player:
   flutter_localizations:
     sdk: flutter
 

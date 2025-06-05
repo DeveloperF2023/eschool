@@ -10,8 +10,15 @@ class HeaderApp extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(title, style: Theme.of(context).textTheme.headlineSmall),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ),
           Container(
             height: 35,
             width: 35,

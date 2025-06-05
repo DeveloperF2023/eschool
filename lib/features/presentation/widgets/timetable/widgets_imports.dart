@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eschool_management/core/constants/app_assets.dart';
+import 'package:eschool_management/core/routes/app_routes.dart';
 import 'package:eschool_management/core/utils/local/local_service.dart';
 import 'package:eschool_management/core/utils/subject_map.dart';
 import 'package:eschool_management/features/domain/entities/timetable/timetable_by_day_entity.dart';

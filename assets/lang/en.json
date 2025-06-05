@@ -74,5 +74,9 @@
   "noExams": "✨ No exams scheduled for now. Time to revise, relax, or explore something new!",
   "noAttendance": "📋Attendance data is currently unavailable. It might not have been recorded yet.",
   "noHomeworkFoundTitle": "No Homework Today!",
-  "examsToday": "My Exams Today"
+  "examsToday": "My Exams Today",
+  "homeworkBySubjectTitle": "Homework",
+  "Today's resources": "Resources",
+  "notes": "Notes",
+  "myAttendance": "My Attendance"
 }

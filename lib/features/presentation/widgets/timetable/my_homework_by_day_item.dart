@@ -9,6 +9,10 @@ class MyHomeworkByDayItem extends StatelessWidget {
     return Container(
       width: HelperFunctions.screenWidth(context),
       padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+      color:
+          HelperFunctions.isDarkMode(context)
+              ? AppColors.dark
+              : AppColors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

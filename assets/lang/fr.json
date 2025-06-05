@@ -72,5 +72,9 @@
   "noExams": "✨ Aucun examen prévu pour le moment. C’est le moment de réviser, se détendre ou découvrir quelque chose de nouveau !",
   "noAttendance": "📋Les données de présence ne sont pas disponibles pour le moment. Elles n'ont peut-être pas encore été enregistrées.",
   "noHomeworkFoundTitle": "Pas de devoirs aujourd’hui !",
-  "examsToday": "Mes Examens aujourd'hui"
+  "examsToday": "Mes Examens aujourd'hui",
+  "homeworkBySubjectTitle": "Devoirs",
+  "Today's resources": "Ressources du jour",
+  "notes": "Notes",
+  "myAttendance": "Ma présence"
 }

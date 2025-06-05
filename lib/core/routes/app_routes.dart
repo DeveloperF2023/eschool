@@ -8,4 +8,5 @@ class AppRoutes {
   static const String login = "login";
   static const String home = "home";
   static const String myHomeworkByDate = "myHomeworkByDate";
+  static const String subjectDetail = "subjectDetail";
 }

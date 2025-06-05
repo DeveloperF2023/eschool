@@ -16,7 +16,7 @@ final Map<String, String> subjectImageMap = {
   'Spanish': AppAssets.spanish,
   'Art': AppAssets.art,
   'Music': AppAssets.music,
-  "Physical Education": AppAssets.sport
+  "Physical Education": AppAssets.sport,
 };
 
 String getSubjectSvg(String subjectName) {
@@ -24,19 +24,19 @@ String getSubjectSvg(String subjectName) {
 }
 
 final Map<String, Color> subjectColorMap = {
-  'Maths': AppColors.mathColor.withValues(alpha: 0.5),
-  'Physics & Chemistry': AppColors.physicsColor.withValues(alpha: 0.5),
-  'Biology': AppColors.biologyColor.withValues(alpha: 0.5),
-  'English Literature': AppColors.englishColor.withValues(alpha: 0.5),
+  'Maths': AppColors.mathColor,
+  'Physics & Chemistry': AppColors.physicsColor,
+  'Biology': AppColors.biologyColor,
+  'English Literature': AppColors.englishColor,
   'History': AppColors.historyColor,
   'Computer Science': AppColors.computerScienceColor.withValues(alpha: 0.6),
-  'Economics': AppColors.economicColor.withValues(alpha: 0.5),
+  'Economics': AppColors.economicColor,
   'Philosophy': AppColors.philosophyColor,
-  'French': AppColors.frenchColor.withValues(alpha: 0.5),
-  'Spanish': AppColors.spanishColor.withValues(alpha: 0.5),
-  'Art': AppColors.artColor.withValues(alpha: 0.5),
-  'Music': AppColors.musicColor.withValues(alpha: 0.5),
-  "Physical Education": AppColors.physicalEducationColor.withValues(alpha: 0.5),
+  'French': AppColors.frenchColor,
+  'Spanish': AppColors.spanishColor,
+  'Art': AppColors.artColor,
+  'Music': AppColors.musicColor,
+  "Physical Education": AppColors.physicalEducationColor,
 };
 Color getSubjectColor(String subjectName) {
   return subjectColorMap[subjectName] ?? Colors.black; // Fallback color

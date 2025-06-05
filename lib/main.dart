@@ -2,7 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:eschool_management/features/presentation/manager/attendance/get_today_and_next_week_attendance/get_today_and_next_week_attendance_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/events/get_events/get_events_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/exams/get_today_next_week_exam/get_today_next_week_exam_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/homeworks/homework_by_subject/homework_by_subject_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/homeworks/my_homeworks_by_day/my_homeworks_by_day_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/resources/resource_by_subject/resource_by_subject_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/subjects/subject_weekly_hours/subject_weekly_hours_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/timetable/get_timetable_by_day/get_timetable_by_day_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/timetable/today_classes/get_today_classes_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/user/login_user/login_user_cubit.dart';
@@ -30,7 +33,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Dio client = Dio();
   RemoteDataSource remoteDataSource = RemoteDataSourceImpl(client: client);
-  print(remoteDataSource.getHomeworkByDay(DateTime.parse("2025-05-30")));
+  print(remoteDataSource.getResourcesBySubject(10));
   runApp(const MyApp());
 }
 
@@ -79,6 +82,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => locator<GetTimetableByDayCubit>()),
         BlocProvider(create: (_) => locator<MyHomeworksByDayCubit>()),
         BlocProvider(create: (_) => locator<GetExamsByDayCubit>()),
+        BlocProvider(create: (_) => locator<HomeworkBySubjectCubit>()),
+        BlocProvider(create: (_) => locator<SubjectWeeklyHoursCubit>()),
+        BlocProvider(create: (_) => locator<ResourceBySubjectCubit>()),
         BlocProvider(
           create: (_) => locator<GetTodayAndNextWeekAttendanceCubit>(),
         ),

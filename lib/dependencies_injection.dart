@@ -2,8 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:eschool_management/features/domain/use_cases/classroom/fetch_classroom_by_school_id_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/events/fetch_events_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/exams/fetch_exams_by_day_use_case.dart';
+import 'package:eschool_management/features/domain/use_cases/homeworks/fetch_homework_by_subject_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/homeworks/fetch_homeworks_by_day_use_case.dart';
+import 'package:eschool_management/features/domain/use_cases/resources/fetch_resources_by_subject_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/schools/get_schools_use_case.dart';
+import 'package:eschool_management/features/domain/use_cases/subjects/fetch_subjects_weekly_hours_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/timetable/fetch_timetable_by_day_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/timetable/fetch_today_classes_use_case.dart';
 import 'package:eschool_management/features/domain/use_cases/user/fetch_user_info_use_case.dart';
@@ -12,9 +15,12 @@ import 'package:eschool_management/features/domain/use_cases/user/is_sign_in_use
 import 'package:eschool_management/features/presentation/manager/classroom/get_classroom/get_classroom_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/events/get_events/get_events_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/exams/get_exams_by_day/get_exams_by_day_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/homeworks/homework_by_subject/homework_by_subject_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/homeworks/my_homeworks_by_day/my_homeworks_by_day_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/homeworks/today_and_next_week_homework/today_and_next_week_homework_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/resources/resource_by_subject/resource_by_subject_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/schools/get_school/get_school_cubit.dart';
+import 'package:eschool_management/features/presentation/manager/subjects/subject_weekly_hours/subject_weekly_hours_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/timetable/get_timetable_by_day/get_timetable_by_day_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/timetable/today_classes/get_today_classes_cubit.dart';
 import 'package:eschool_management/features/presentation/manager/user/auth/auth_cubit.dart';
@@ -89,6 +95,17 @@ Future<void> setupLocator() async {
   locator.registerFactory(
     () => GetExamsByDayCubit(fetchExamsByDayUseCase: locator.call()),
   );
+  locator.registerFactory(
+    () => HomeworkBySubjectCubit(fetchHomeworkBySubjectUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () =>
+        SubjectWeeklyHoursCubit(fetchSubjectWeeklyHoursUseCase: locator.call()),
+  );
+  locator.registerFactory(
+    () =>
+        ResourceBySubjectCubit(fetchResourcesBySubjectUseCase: locator.call()),
+  );
 
   ///Use Case
   locator.registerLazySingleton(
@@ -135,6 +152,15 @@ Future<void> setupLocator() async {
   );
   locator.registerLazySingleton(
     () => FetchExamsByDayUseCase(repository: locator.call()),
+  );
+  locator.registerLazySingleton(
+    () => FetchSubjectWeeklyHoursUseCase(repository: locator.call()),
+  );
+  locator.registerLazySingleton(
+    () => FetchHomeworkBySubjectUseCase(repository: locator.call()),
+  );
+  locator.registerLazySingleton(
+    () => FetchResourcesBySubjectUseCase(repository: locator.call()),
   );
 
   ///Repository

@@ -3,12 +3,15 @@ import 'package:eschool_management/features/data/models/exams/exams_by_day_model
 import 'package:eschool_management/features/data/models/exams/exams_today_next_week_model.dart';
 import 'package:eschool_management/features/data/models/homeworks/homework_by_day_model.dart';
 import 'package:eschool_management/features/data/models/homeworks/homework_today_and_next_week_model.dart';
+import 'package:eschool_management/features/data/models/resources/resources_model.dart';
+import 'package:eschool_management/features/data/models/subjects/subject_weekly_hour_model.dart';
 import 'package:eschool_management/features/data/models/timetable/timetable_by_day_model.dart';
 import 'package:eschool_management/features/data/models/timetable/today_classes_model.dart';
 import 'package:eschool_management/features/data/models/user/user_model.dart';
 
 import '../models/attendance/today_and_next_week_attendance_model.dart';
 import '../models/events/event_model.dart';
+import '../models/homeworks/homework_by_subject_model.dart';
 import '../models/schools/school_model.dart';
 
 abstract class RemoteDataSource {
@@ -39,7 +42,14 @@ abstract class RemoteDataSource {
   ///Homeworks
   Future<List<HomeworkTodayAndNextWeekModel>> getTodayAndNextWeekHomeworks();
   Future<List<HomeworksByDayModel>> getHomeworkByDay(DateTime dueDate);
+  Future<List<HomeworkBySubjectModel>> getHomeworkBySubject(int subjectId);
 
   ///Attendance
   Future<List<TodayAndNextWeekAttendanceModel>> getTodayAndNextWeekAttendance();
+
+  /// Subjects
+  Future<SubjectWeeklyHoursModel> getSubjectWeeklyHours(int subjectId);
+
+  /// Resources
+  Future<List<ResourceModel>> getResourcesBySubject(int subjectId);
 }

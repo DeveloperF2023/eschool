@@ -3,8 +3,11 @@ import 'package:eschool_management/features/domain/entities/classrooms/classroom
 import 'package:eschool_management/features/domain/entities/exams/exams_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/exams/exams_today_next_week_entity.dart';
 import 'package:eschool_management/features/domain/entities/homeworks/homework_by_day_entity.dart';
+import 'package:eschool_management/features/domain/entities/homeworks/homework_by_subject_entity.dart';
 import 'package:eschool_management/features/domain/entities/homeworks/homework_today_and_next_week_entity.dart';
+import 'package:eschool_management/features/domain/entities/resources/resource_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
+import 'package:eschool_management/features/domain/entities/subjects/subject_weekly_hours_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/timetable_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 
@@ -55,8 +58,19 @@ abstract class Repository {
   Future<Either<Failure, List<HomeworkByDayEntity>>> getHomeworkByDay(
     DateTime dueDate,
   );
+  Future<Either<Failure, List<HomeworkBySubjectEntity>>> getHomeworkBySubject(
+    int subjectId,
+  );
 
   ///Attendance
   Future<Either<Failure, List<TodayAndNextWeekAttendanceEntity>>>
   getTodayAndNextWeekAttendance();
+
+  ///Subjects
+  Future<Either<Failure, SubjectWeeklyHoursEntity>> getSubjectWeeklyHours(
+    int subjectId,
+  );
+
+  ///Resource
+  Future<Either<Failure, List<ResourceEntity>>> getResource(int subjectId);
 }

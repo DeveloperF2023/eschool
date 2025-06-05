@@ -6,8 +6,11 @@ import 'package:eschool_management/features/domain/entities/events/event_entity.
 import 'package:eschool_management/features/domain/entities/exams/exams_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/exams/exams_today_next_week_entity.dart';
 import 'package:eschool_management/features/domain/entities/homeworks/homework_by_day_entity.dart';
+import 'package:eschool_management/features/domain/entities/homeworks/homework_by_subject_entity.dart';
 import 'package:eschool_management/features/domain/entities/homeworks/homework_today_and_next_week_entity.dart';
+import 'package:eschool_management/features/domain/entities/resources/resource_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
+import 'package:eschool_management/features/domain/entities/subjects/subject_weekly_hours_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/timetable_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 import 'package:eschool_management/features/domain/entities/user/user_entity.dart';
@@ -169,6 +172,42 @@ class RepositoryImpl extends Repository {
   ) async {
     try {
       final result = await remoteDataSource.getExamsByDay(examDate);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<HomeworkBySubjectEntity>>> getHomeworkBySubject(
+    int subjectId,
+  ) async {
+    try {
+      final result = await remoteDataSource.getHomeworkBySubject(subjectId);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SubjectWeeklyHoursEntity>> getSubjectWeeklyHours(
+    int subjectId,
+  ) async {
+    try {
+      final result = await remoteDataSource.getSubjectWeeklyHours(subjectId);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ResourceEntity>>> getResource(
+    int subjectId,
+  ) async {
+    try {
+      final result = await remoteDataSource.getResourcesBySubject(subjectId);
       return Right(result);
     } on Exception {
       return const Left(ServerFailure(message: 'An error has occurred'));
