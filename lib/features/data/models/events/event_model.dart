@@ -9,22 +9,25 @@ class EventModel extends EventEntity {
   String? endTime;
   String? location;
   String? type;
+  String? eventPicture;
   int? classroomId;
   String? createdAt;
   String? updatedAt;
 
-  EventModel(
-      {this.id,
-      this.title,
-      this.description,
-      this.eventDate,
-      this.startTime,
-      this.endTime,
-      this.location,
-      this.type,
-      this.classroomId,
-      this.createdAt,
-      this.updatedAt});
+  EventModel({
+    this.id,
+    this.title,
+    this.description,
+    this.eventDate,
+    this.startTime,
+    this.endTime,
+    this.location,
+    this.type,
+    this.classroomId,
+    this.createdAt,
+    this.updatedAt,
+    this.eventPicture,
+  });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
@@ -36,6 +39,7 @@ class EventModel extends EventEntity {
       endTime: json['end_time'],
       location: json['location'],
       type: json['type'],
+      eventPicture: json['event_picture'],
       classroomId: json['classroom_id'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],

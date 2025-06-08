@@ -22,7 +22,10 @@ class TodayClassesItem extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: AppColors.primaryColor.withValues(alpha: 0.1),
+                  color:
+                      HelperFunctions.isDarkMode(context)
+                          ? AppColors.darkContainer
+                          : AppColors.light,
                 ),
                 child: Center(
                   child: Padding(
@@ -30,9 +33,12 @@ class TodayClassesItem extends StatelessWidget {
                     child: Text(
                       AppLocalization.of(context)!.translate("noClassesToday"),
                       textAlign: TextAlign.center,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleLarge!.copyWith(color: AppColors.black),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color:
+                            HelperFunctions.isDarkMode(context)
+                                ? Colors.white
+                                : AppColors.black,
+                      ),
                     ),
                   ),
                 ),
@@ -55,15 +61,18 @@ class TodayClassesItem extends StatelessWidget {
                     margin: EdgeInsets.only(right: 10),
                     padding: EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
-                      color: AppColors.timetableColor,
+                      color: getSubjectColor(
+                        classes.subject!.name!,
+                      ).withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(11),
                     ),
                     child: Column(
                       children: [
                         Text(
                           '${customFormatTime(classes.startTime!)} - ${customFormatTime(classes.endTime!)}',
-                          style: Theme.of(context).textTheme.titleLarge!
-                              .copyWith(fontSize: 11, color: Colors.black),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.titleLarge!.copyWith(fontSize: 11),
                         ),
                         SizedBox(height: 5),
                         Text(
@@ -72,12 +81,8 @@ class TodayClassesItem extends StatelessWidget {
                             9,
                           ),
                           textAlign: TextAlign.center,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black,
-                          ),
+                          style: Theme.of(context).textTheme.titleLarge!
+                              .copyWith(fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),

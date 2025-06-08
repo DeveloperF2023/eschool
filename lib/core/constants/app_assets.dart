@@ -45,4 +45,7 @@ class AppAssets {
 
   ///Lotties
   static const String loading = "$lottiePath/loading.json";
+
+  ///Illustrations
+  static const String noData = "$imagePath/no_data.png";
 }

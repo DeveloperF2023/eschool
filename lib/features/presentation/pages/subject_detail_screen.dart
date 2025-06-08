@@ -1,5 +1,6 @@
 import 'package:eschool_management/core/api/endpoints_constants.dart';
 import 'package:eschool_management/core/constants/app_colors.dart';
+import 'package:eschool_management/core/utils/helper_functions.dart';
 import 'package:eschool_management/core/utils/local/local_service.dart';
 import 'package:eschool_management/dependencies_injection.dart';
 import 'package:eschool_management/features/presentation/manager/subjects/subject_weekly_hours/subject_weekly_hours_cubit.dart';
@@ -88,7 +89,7 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
                               builder: (context, state) {
                                 print("State of weekly hours: $state");
                                 if (state is SubjectWeeklyHoursLoading) {
-                                  return CircularProgressIndicator();
+                                  return Container();
                                 } else if (state is SubjectWeeklyHoursLoaded) {
                                   return Text(
                                     "${state.subjectWeeklyHours.hoursPerWeek} h/ week",
@@ -119,25 +120,34 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
 
                 margin: EdgeInsets.only(left: 15, right: 15, top: 20),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5EFFF).withValues(alpha: 0.5),
+                  color:
+                      HelperFunctions.isDarkMode(context)
+                          ? AppColors.darkerGrey
+                          : AppColors.light,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: TabBar(
                   isScrollable: false,
                   labelPadding: const EdgeInsets.only(left: 5, right: 5),
                   indicator: BoxDecoration(
-                    color: Color(0xffA294F9),
+                    color:
+                        HelperFunctions.isDarkMode(context)
+                            ? AppColors.dark
+                            : AppColors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   unselectedLabelColor: Colors.black54,
-                  labelColor: Colors.white,
+                  labelColor:
+                      HelperFunctions.isDarkMode(context)
+                          ? AppColors.white
+                          : AppColors.black,
                   indicatorPadding: const EdgeInsets.symmetric(vertical: 8),
                   indicatorSize: TabBarIndicatorSize.tab,
                   labelStyle: Theme.of(
                     context,
-                  ).textTheme.bodyMedium!.copyWith(fontSize: 12),
+                  ).textTheme.bodyLarge!.copyWith(fontSize: 12),
                   dividerColor: Colors.transparent,
-                  padding: EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: 10, right: 10),
                   tabs: [
                     Tab(
                       text: AppLocalization.of(
@@ -161,7 +171,9 @@ class _SubjectDetailScreenState extends State<SubjectDetailScreen> {
                   children: [
                     HomeworkBySubject(subjectId: widget.timetable.subjectId!),
                     ResourceBySubject(subjectId: widget.timetable.subjectId!),
-                    Center(child: Text("Weekly Content")),
+                    TeacherNoteBySubject(
+                      subjectId: widget.timetable.subjectId!,
+                    ),
                   ],
                 ),
               ),

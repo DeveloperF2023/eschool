@@ -25,6 +25,9 @@ class HomeworkItem extends StatelessWidget {
               return NoDataFounded(
                 noFoundedText: AppLocalization.of(
                   context,
+                )!.translate("noHomeworkFoundTitle"),
+                noFoundedSubtitle: AppLocalization.of(
+                  context,
                 )!.translate("noHomeworkFound"),
               );
             }

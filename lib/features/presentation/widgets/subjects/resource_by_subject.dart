@@ -18,6 +18,34 @@ class ResourceBySubject extends StatelessWidget {
             return LoadingItem();
           } else if (state is ResourceBySubjectLoaded) {
             final resource = state.resources;
+            if (resource.isEmpty) {
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                  top: HelperFunctions.screenHeight(context) * .1,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      AppLocalization.of(
+                        context,
+                      )!.translate("noResourcesFoundTitle"),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      AppLocalization.of(
+                        context,
+                      )!.translate("noResourcesFoundSubtitle"),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
+                ),
+              );
+            }
             return SizedBox(
               height: HelperFunctions.screenHeight(context) * .4,
               child: ListView.builder(

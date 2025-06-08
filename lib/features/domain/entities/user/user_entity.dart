@@ -5,10 +5,10 @@ import 'user_data_entity.dart';
 class UserEntity extends Equatable {
   final String? token;
   final UserDataEntity? user;
-
-  const UserEntity({this.token, this.user});
+  final int? studentId;
+  const UserEntity({this.token, this.user, this.studentId});
 
   @override
   // TODO: implement props
-  List<Object?> get props => [token, user];
+  List<Object?> get props => [token, user, studentId];
 }

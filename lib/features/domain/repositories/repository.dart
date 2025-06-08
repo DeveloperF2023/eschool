@@ -14,6 +14,7 @@ import 'package:eschool_management/features/domain/entities/timetable/today_clas
 import '../../../core/error/failure.dart';
 import '../entities/attendance/today_and_next_week_attendance_entity.dart';
 import '../entities/events/event_entity.dart';
+import '../entities/teacher_notes/teacher_note_entity.dart';
 import '../entities/user/user_entity.dart';
 
 abstract class Repository {
@@ -43,7 +44,10 @@ abstract class Repository {
   );
 
   ///Events Repository
-  Future<Either<Failure, List<EventEntity>>> getEvents();
+  Future<Either<Failure, List<EventEntity>>> getUpcomingEvents();
+  Future<Either<Failure, List<EventEntity>>> getRecentEvents();
+  Future<Either<Failure, List<EventEntity>>> getTodayEvents();
+  Future<Either<Failure, EventEntity>> getDetailEvent(int eventId);
 
   ///Exams
   Future<Either<Failure, List<ExamTodayAndNextWeekEntity>>>
@@ -73,4 +77,9 @@ abstract class Repository {
 
   ///Resource
   Future<Either<Failure, List<ResourceEntity>>> getResource(int subjectId);
+
+  ///Teacher Notes
+  Future<Either<Failure, List<TeacherNoteEntity>>> getTeacherNotes(
+    int subjectId,
+  );
 }

@@ -9,4 +9,6 @@ class AppRoutes {
   static const String home = "home";
   static const String myHomeworkByDate = "myHomeworkByDate";
   static const String subjectDetail = "subjectDetail";
+  static const String events = "events";
+  static const String eventDetail = "eventDetail";
 }

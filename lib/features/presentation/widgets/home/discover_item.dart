@@ -3,8 +3,11 @@ part of 'widgets_imports.dart';
 class DiscoverItem extends StatelessWidget {
   final String icon;
   final String discoverText;
-  const DiscoverItem(
-      {super.key, required this.icon, required this.discoverText});
+  const DiscoverItem({
+    super.key,
+    required this.icon,
+    required this.discoverText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,29 +17,24 @@ class DiscoverItem extends StatelessWidget {
           height: 55,
           width: 55,
           decoration: BoxDecoration(
-              border: Border.all(
-                  color: HelperFunctions.isDarkMode(context)
-                      ? AppColors.white
-                      : Colors.black),
-              borderRadius: BorderRadius.circular(10)),
+            color:
+                HelperFunctions.isDarkMode(context)
+                    ? AppColors.darkContainer
+                    : AppColors.light,
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Center(
-            child: Iconify(
-              icon,
-              size: 27,
-              color: AppColors.primaryColor,
-            ),
+            child: Iconify(icon, size: 27, color: AppColors.primaryColor),
           ),
         ),
-        SizedBox(
-          height: 5,
-        ),
+        SizedBox(height: 5),
         Text(
           discoverText,
           textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall!
-              .copyWith(fontWeight: FontWeight.w600, fontSize: 12),
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            fontWeight: FontWeight.w600,
+            fontSize: 12,
+          ),
         ),
       ],
     );

@@ -76,5 +76,20 @@
   "homeworkBySubjectTitle": "Devoirs",
   "Today's resources": "Ressources du jour",
   "notes": "Notes",
-  "myAttendance": "Ma présence"
+  "myAttendance": "Ma présence",
+  "noResourcesFoundTitle": "Les ressources font une pause !",
+  "noResourcesFoundSubtitle": "Aucune ressource disponible pour le moment. Elles arrivent peut-être ! Revenez bientôt ou contactez votre enseignant pour plus d’informations.",
+
+  "noNotesFoundTitle": "Oups ! Aucune note trouvée",
+  "noNotesFoundSubtitle": "Il n’y a pas encore de notes disponibles. Revenez plus tard ou contactez votre enseignant pour une mise à jour rapide.",
+  "today": "Aujourd'hui",
+  "recent": "Récents",
+  "upcoming": "À venir",
+  "recentEvents": "Événements récents",
+  "todayEvents": "Événements d'aujourd'hui",
+  "upcomingEvents": "Événements à venir",
+  "noEventsFound": "Aucun événement trouvé",
+  "noEventsFoundSubtitle": "Il semble qu'il n'y ait pas d'événements prévus pour le moment. Restez à l'écoute pour les mises à jour ou revenez plus tard !",
+  "from": "De",
+  "to": "À"
 }

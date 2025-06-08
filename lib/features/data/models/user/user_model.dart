@@ -4,11 +4,12 @@ import 'package:eschool_management/features/domain/entities/user/user_entity.dar
 class UserModel extends UserEntity {
   String? token;
   UserDataModel? user;
-
-  UserModel({this.token, this.user});
+  int? studentId;
+  UserModel({this.token, this.user, this.studentId});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     user = json['user'] != null ? UserDataModel.fromJson(json['user']) : null;
+    studentId = json['student_id'];
   }
 }

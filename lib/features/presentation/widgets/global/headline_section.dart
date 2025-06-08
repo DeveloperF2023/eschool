@@ -2,7 +2,12 @@ part of 'widgets_imports.dart';
 
 class HeadlineSection extends StatelessWidget {
   final String headline;
-  const HeadlineSection({super.key, required this.headline});
+  final void Function()? onSeeAllPressed;
+  const HeadlineSection({
+    super.key,
+    required this.headline,
+    this.onSeeAllPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +22,16 @@ class HeadlineSection extends StatelessWidget {
           ),
         ),
         TextButton(
-            onPressed: () {},
-            child: Text(
-              AppLocalization.of(context)!.translate("seeAll"),
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: AppColors.primaryColor,
-                  decoration: TextDecoration.underline,
-                  decorationColor: AppColors.primaryColor),
-            ))
+          onPressed: onSeeAllPressed,
+          child: Text(
+            AppLocalization.of(context)!.translate("seeAll"),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: AppColors.primaryColor,
+              decoration: TextDecoration.underline,
+              decorationColor: AppColors.primaryColor,
+            ),
+          ),
+        ),
       ],
     );
   }

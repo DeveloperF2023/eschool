@@ -76,6 +76,19 @@
   "homeworkBySubjectTitle": " الواجبات",
   "Today's resources": " موارد اليوم",
   "notes": " ملاحظات",
-  "myAttendance": " حضوري"
-
+  "myAttendance": " حضوري",
+  "noResourcesFoundTitle": "الموارد التعليمية في استراحة!",
+  "noResourcesFoundSubtitle": "لا توجد موارد متاحة حالياً. ربما في الطريق! حاول مرة أخرى لاحقاً أو تواصل مع معلمك للمساعدة.",
+  "noNotesFoundTitle": "عذرًا! لا توجد ملاحظات",
+  "noNotesFoundSubtitle": "يبدو أنه لا توجد ملاحظات في الوقت الحالي. حاول الرجوع لاحقًا أو تواصل مع المعلم للحصول على التحديثات.",
+  "today": "اليوم",
+  "recent": "حديث",
+  "upcoming": "القادم",
+  "recentEvents": "أحداث حديثة",
+  "todayEvents": "أحداث اليوم",
+  "upcomingEvents": "الأحداث القادمة",
+  "noEventsFound": "لا توجد أحداث",
+  "noEventsFoundSubtitle": " يبدو أنه لا توجد أحداث مجدولة في الوقت الحالي. تابع التحديثات أو تحقق مرة أخرى لاحقًا!",
+  "from": "من",
+  "to": "إلى"
 }

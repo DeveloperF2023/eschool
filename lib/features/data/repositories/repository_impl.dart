@@ -11,6 +11,7 @@ import 'package:eschool_management/features/domain/entities/homeworks/homework_t
 import 'package:eschool_management/features/domain/entities/resources/resource_entity.dart';
 import 'package:eschool_management/features/domain/entities/schools/school_entity.dart';
 import 'package:eschool_management/features/domain/entities/subjects/subject_weekly_hours_entity.dart';
+import 'package:eschool_management/features/domain/entities/teacher_notes/teacher_note_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/timetable_by_day_entity.dart';
 import 'package:eschool_management/features/domain/entities/timetable/today_classes_entity.dart';
 import 'package:eschool_management/features/domain/entities/user/user_entity.dart';
@@ -100,9 +101,9 @@ class RepositoryImpl extends Repository {
   }
 
   @override
-  Future<Either<Failure, List<EventEntity>>> getEvents() async {
+  Future<Either<Failure, List<EventEntity>>> getUpcomingEvents() async {
     try {
-      final result = await remoteDataSource.getEvents();
+      final result = await remoteDataSource.getUpcomingEvents();
       return Right(result);
     } on Exception {
       return const Left(ServerFailure(message: 'An error has occurred'));
@@ -208,6 +209,48 @@ class RepositoryImpl extends Repository {
   ) async {
     try {
       final result = await remoteDataSource.getResourcesBySubject(subjectId);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TeacherNoteEntity>>> getTeacherNotes(
+    int subjectId,
+  ) async {
+    try {
+      final result = await remoteDataSource.getTeacherNotesBySubject(subjectId);
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<EventEntity>>> getRecentEvents() async {
+    try {
+      final result = await remoteDataSource.getRecentEvents();
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<EventEntity>>> getTodayEvents() async {
+    try {
+      final result = await remoteDataSource.getTodayEvents();
+      return Right(result);
+    } on Exception {
+      return const Left(ServerFailure(message: 'An error has occurred'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, EventEntity>> getDetailEvent(int eventId) async {
+    try {
+      final result = await remoteDataSource.getEventsById(eventId);
       return Right(result);
     } on Exception {
       return const Left(ServerFailure(message: 'An error has occurred'));

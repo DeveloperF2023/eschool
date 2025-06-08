@@ -3,6 +3,8 @@ import 'package:eschool_management/features/presentation/pages/auth/choose_stude
 import 'package:eschool_management/features/presentation/pages/auth/choose_user_type.dart';
 import 'package:eschool_management/features/presentation/pages/auth/enter_mail_screen.dart';
 import 'package:eschool_management/features/presentation/pages/auth/login_screen.dart';
+import 'package:eschool_management/features/presentation/pages/event_detail_screen.dart';
+import 'package:eschool_management/features/presentation/pages/event_screen.dart';
 import 'package:eschool_management/features/presentation/pages/home_screen.dart';
 import 'package:eschool_management/features/presentation/pages/splash_screen.dart';
 import 'package:eschool_management/features/presentation/pages/subject_detail_screen.dart';
@@ -63,6 +65,16 @@ class OnGenerateRoute {
         {
           if (args is TimetableByDayEntity) {
             return routeBuilder(SubjectDetailScreen(timetable: args));
+          }
+        }
+      case AppRoutes.events:
+        {
+          return routeBuilder(EventScreen());
+        }
+      case AppRoutes.eventDetail:
+        {
+          if (args is int) {
+            return routeBuilder(EventDetailScreen(eventId: args));
           }
         }
     }

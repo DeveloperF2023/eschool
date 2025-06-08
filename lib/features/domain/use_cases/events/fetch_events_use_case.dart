@@ -10,6 +10,6 @@ class FetchEventsUseCase {
   FetchEventsUseCase({required this.repository});
 
   Future<Either<Failure, List<EventEntity>>> callback() {
-    return repository.getEvents();
+    return repository.getUpcomingEvents();
   }
 }

@@ -71,7 +71,7 @@ class AppColors {
   static const Color economicColor = Color(0xFFF79B72);
   static const Color philosophyColor = Color(0xFFFFFA8D);
   static const Color frenchColor = Color(0xFFF564A9);
-  static const Color englishColor = Color(0xFFCB0404);
+  static const Color englishColor = Color(0xFFA53860);
   static const Color spanishColor = Color(0xFFFF9F00);
   static const Color historyColor = Color(0xFFAFDDFF);
   static const Color artColor = Color(0xFFE69DB8);
